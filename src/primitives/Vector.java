@@ -6,7 +6,7 @@ import static primitives.Point3D.zero;
 public class Vector {
     Point3D _head;
 
-/*returns head of vector, which represents it.*/
+    /*returns head of vector, which represents it.*/
     public Point3D getHead() {
         return _head;
     }
@@ -21,11 +21,6 @@ public class Vector {
 
     /*constructor with doubles*/
     public Vector(double x, double y, double z) {
-        this(new Point3D(x, y, z));
-    }
-
-    /*constructor with coordinates*/
-    public Vector(Coordinate x, Coordinate y, Coordinate z) {
         this(new Point3D(x, y, z));
     }
 
@@ -81,35 +76,38 @@ public class Vector {
     public Vector normalize() {
 
         double len = length();
-        if (len==0){
-            throw new ArithmeticException("cannot divide by 0");
-        }
-        double x= _head._x._coord / len;
-        double y= _head._y._coord / len;
-        double z= _head._z._coord / len;
+        // if (len == 0) {
+        // throw new ArithmeticException("cannot divide by 0");
+       // }
+        double newX = _head._x._coord / len;
+        double newY = _head._y._coord / len;
+        double newZ = _head._z._coord / len;
 
-        Point3D newhead= new Point3D(x,y,z);
-        if(zero.equals(newhead)){
+        Point3D newPoint = new Point3D(newX, newY, newZ);
+
+        //head vector cannot be point (0,0,0).
+        if (zero.equals(newPoint)) {
             throw new IllegalArgumentException("Vector head can not be point(0,0,0)");
         }
-        _head= newhead;
+
+        _head = newPoint;
         return this;
     }
 
     /*return a new normalized vector(does not change the original)*/
-    public Vector normalized(){
-        Vector result= new Vector(_head);
+    public Vector normalized() {
+        Vector result = new Vector(_head);
         result.normalize();
         return result;
     }
 
     /*Vector multiplication by a number-scalar*/
-    public Vector scale(double num){
+    public Vector scale(double num) {
 
-        double x=  _head._x._coord * num;
-        double y=  _head._y._coord * num;
-        double z=  _head._z._coord * num;
+        double x = _head._x._coord * num;
+        double y = _head._y._coord * num;
+        double z = _head._z._coord * num;
 
-        return new Vector(x,y,z);
+        return new Vector(x, y, z);
     }
 }

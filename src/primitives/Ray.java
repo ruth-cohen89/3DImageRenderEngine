@@ -11,10 +11,18 @@ public class  Ray {
         _dir = dir;
     }
 
+    /**
+     * getter for origin of the ray
+     * @return p0
+     */
     public primitives.Point3D getP0() {
         return _p0;
     } //return the value of the point.
 
+    /**
+     * getter for direction vector of the ray
+     * @return _dir
+     */
     public primitives.Vector getDir() {
         return _dir;
     } //return the value of the vector.

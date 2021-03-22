@@ -9,22 +9,22 @@ public class Point3D {
     /*defining point zero.*/
     public final static Point3D zero = new Point3D(0d, 0d, 0d);
 
+//    public double getX() {
+//        return _x;
+//    }
+//
+//    public double getY() {
+//        return _y;
+//    }
+//
+//    public double getZ() {
+//        return _z;
+//    }
+
     /**
-     * primary constructor for 3D point
-     *
-     * @param x value for x 3D point
-     * @param y value for x 3D point
-     * @param z value for x 3D point
+     * defining a point with 3 double,
+     * (the number becomes a coordinate)
      */
-
-    /*defining a point with 3 coordinates*/
-    public Point3D(Coordinate x, Coordinate y, Coordinate z) {
-        _x = x;
-        _y = y;
-        _z = z;
-    }
-
-    /*defining a point with 3 double,(the number becomes a coordinate)*/
     public Point3D(double x, double y, double z) {
         // this(new Coordinate(x), new Coordinate(y), new Coordinate(z));
         _x = new Coordinate(x);
@@ -71,7 +71,9 @@ public class Point3D {
         return new Point3D(x,y,z);
     }
 
-    /*returns distanceSquared between 2 vectors */
+    /**
+     * returns distanceSquared between 2 vectors
+     */
     public double distanceSquared(Point3D p) {
         double xx= (_x._coord - p._x._coord) * (_x._coord- p._x._coord);
         double yy= (_y._coord- p._y._coord) * (_y._coord- p._y._coord);
@@ -80,7 +82,7 @@ public class Point3D {
         return xx+ yy+ zz;
     }
 
-/*the distance between 2 vectors is sqrt of distanceSquared*/
+/*the distance between 2 vectors is sqrt of distanceSquared */
     public double distance(Point3D other) {
         return Math.sqrt(distanceSquared(other));
     }
