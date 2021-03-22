@@ -6,7 +6,7 @@ public class Point3D {
     final Coordinate _y;
     final Coordinate _z;
 
-    /*defining point zero*/
+    /*defining point zero.*/
     public final static Point3D zero = new Point3D(0d, 0d, 0d);
 
     /**

@@ -6,7 +6,7 @@ import static primitives.Point3D.zero;
 public class Vector {
     Point3D _head;
 
-/*returns head of vector, which represents it*/
+/*returns head of vector, which represents it.*/
     public Point3D getHead() {
         return _head;
     }

@@ -8,7 +8,7 @@ public class Sphere implements Geometry{
     Point3D _point3D;
     double _radius;
 
-/*constructor with a point and a radius*/
+/*constructor with a point and a radius.*/
     public Sphere(Point3D point3D, double radius){
         _radius= radius;
         _point3D= point3D;

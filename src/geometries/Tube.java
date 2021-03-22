@@ -4,7 +4,7 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-/*a tube with a ray and a radius*/
+/*a tube with a ray and a radius.*/
 public class Tube implements Geometry{
     Ray _ray;
     double _radius;

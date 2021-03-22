@@ -3,7 +3,7 @@ package primitives;
 import java.util.Objects;
 
 public class  Ray {
-    final Point3D _p0; //point.
+    final Point3D _p0; //point..
     final Vector _dir; //direction vector.
 
     public Ray(Point3D p0, Vector dir) { //constructor.

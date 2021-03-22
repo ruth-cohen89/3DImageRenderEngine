@@ -15,7 +15,7 @@ import static primitives.Util.isZero;
  */
 public class Polygon implements Geometry { //(with many ribs)
     /**
-     * List of polygon's vertices
+     * List of polygon's vertices.
      */
     protected List<Point3D> vertices;
     /**
