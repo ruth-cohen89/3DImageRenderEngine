@@ -12,8 +12,8 @@ public class Triangle extends Polygon implements Geometry{
     @Override
     public String toString() {
         return "Triangle{" +
-                "vertices=" + vertices +
-                ", plane=" + plane +
+                "vertices=" + _vertices +
+                ", plane=" + _plane +
                 '}';
     }
 }

@@ -8,7 +8,8 @@ public class Vector {
 
     /*returns head of vector, which represents it.*/
     public Point3D getHead() {
-        return _head;
+        //return head
+        return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
     }
 
     /*constructor with head*/

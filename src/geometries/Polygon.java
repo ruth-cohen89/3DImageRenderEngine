@@ -17,11 +17,11 @@ public class Polygon implements Geometry { //(with many ribs)
     /**
      * List of polygon's vertices.
      */
-    protected List<Point3D> vertices;
+    protected List<Point3D> _vertices;
     /**
      * Associated plane in which the polygon lays
      */
-    protected Plane plane;
+    protected Plane _plane;
 
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
@@ -47,15 +47,16 @@ public class Polygon implements Geometry { //(with many ribs)
     public Polygon(Point3D... vertices) {//ctor
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
-        this.vertices = List.of(vertices);
+        this._vertices = List.of(vertices);
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
-        plane = new Plane(vertices[0], vertices[1], vertices[2]);
+        _plane = new Plane(vertices[0], vertices[1], vertices[2]);
         if (vertices.length == 3)
             return; // no need for more tests for a Triangle
 
-        Vector n = plane.getNormal(null);
+        //Vector n = _plane.getNormal(null);
+        Vector n = _plane.getNormal();
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
@@ -86,6 +87,15 @@ public class Polygon implements Geometry { //(with many ribs)
 
     @Override
     public Vector getNormal(Point3D point) {
-        return plane.getNormal(null);
+        return _plane.getNormal(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Polygon{" +
+                "_vertices=" + _vertices +
+                ", _plane=" + _plane +
+                '}';
     }
 }
+
