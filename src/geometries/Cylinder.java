@@ -4,14 +4,15 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-/*represents a Cylinder.*/
-public class Cylinder extends Tube implements Geometry{
+import java.util.List;
 
-    double _height;
+/*.*/
+public class Cylinder extends Tube {//implements Geometry{
+    final double _height;
 
 /*constructor with radius, ray and height*/
-    public Cylinder(double radius, Ray ray ,double height) {
-        super(ray,radius);
+    public Cylinder(Ray axisRay , double radius ,double height) {
+        super(axisRay,radius);
         _height= height;
     }
 
@@ -29,5 +30,10 @@ public class Cylinder extends Tube implements Geometry{
     @Override
     public Vector getNormal(Point3D point) {
         return null;
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return super.findIntersections(ray);
     }
 }
