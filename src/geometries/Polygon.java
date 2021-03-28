@@ -56,8 +56,8 @@ public class Polygon implements Geometry { //(with many ribs)
         if (vertices.length == 3)
             return; // no need for more tests for a Triangle
 
-        //Vector n = _plane.getNormal(null);
-        Vector n = _plane.getNormal();
+        Vector n = _plane.getNormal(null);
+       // Vector n = _plane.getNormal();
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point

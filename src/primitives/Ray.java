@@ -2,6 +2,7 @@ package primitives;
 
 import java.util.Objects;
 
+//**ray- straight that extends to infinity in only one direction**//
 public class  Ray {
     final Point3D _pOrigin; //point..
     final Vector _direction; //direction vector.

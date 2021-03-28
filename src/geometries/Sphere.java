@@ -37,7 +37,7 @@ public class Sphere implements Geometry {
 
     @Override
     public Vector getNormal(Point3D p) {
-        Vector o_p = p.substract(_center);
+        Vector o_p = p.subtract(_center);
         return o_p.normalize();
 
     }
@@ -51,7 +51,7 @@ public class Sphere implements Geometry {
             return List.of(_center.add(v.scale(_radius)));
         }
 
-        Vector U = _center.substract(P0);
+        Vector U = _center.subtract(P0);
 
         double tm = alignZero(v.dotProduct(U));
 

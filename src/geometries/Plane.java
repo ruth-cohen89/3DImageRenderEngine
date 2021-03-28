@@ -18,26 +18,28 @@ public class Plane implements Geometry {
     /*ctor with 3 points*/
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
         _q0 = p1;
-        Vector v1=p2.substract(p1);
-        Vector v2=p3.substract(p1);
-        Vector n=v1.crossProduct(v2);
+        Vector v1 = p2.subtract(p1);
+        Vector v2 = p3.subtract(p1);
+        Vector n = v1.crossProduct(v2);
         _normal = n.normalize();
 
     }
 
     /**
-     *constructor for Plane
+     * constructor for Plane
+     *
      * @param point
-     * @param normal vector for the normal (will be normalized automatically)
+     * @param vector for the normal (will be normalized automatically)
      */
-    public Plane(Point3D point, Vector vector){
-        _q0= point;
+    public Plane(Point3D point, Vector vector) {
+        _q0 = point;
 
-        _normal= vector.normalized();
+        _normal = vector.normalized();
     }
 
     /**
      * getter of Q0 field
+     *
      * @return reference to Q0 point of the plane
      */
     public Point3D getQ0() {
@@ -47,6 +49,7 @@ public class Plane implements Geometry {
     /**
      * getter of normal field
      * Deprecated use {@link Plane#getNormal(Point3D)} with null values as parameters
+     *
      * @return reference to normal vector of the plane
      */
     @Deprecated
@@ -64,6 +67,7 @@ public class Plane implements Geometry {
 
     /**
      * getNormal implementation of Geometry interface
+     *
      * @param point
      * @return
      */
@@ -80,10 +84,10 @@ public class Plane implements Geometry {
 
         Vector n = _normal;
 
-        if(_q0.equals(P0)){
+        if (_q0.equals(P0)) {
             return null;
         }
-        Vector P0_Q0 = _q0.substract(P0);
+        Vector P0_Q0 = _q0.subtract(P0);
 
         double mechane = alignZero(n.dotProduct(P0_Q0));
 
@@ -95,13 +99,14 @@ public class Plane implements Geometry {
         double nv = alignZero(n.dotProduct(v));
 
         //ray is lying in the plane axis
-        if (isZero(nv)){
+        if (isZero(nv)) {
             return null;
-    }
-        double t=alignZero(mechane/nv);
+        }
+        double t = alignZero(mechane / nv);
 
-        Point3D P=P0.add(v.scale(t));
+        Point3D P = P0.add(v.scale(t));
 
         return List.of(P);
 
+    }
 }

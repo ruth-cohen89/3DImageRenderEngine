@@ -41,7 +41,7 @@ public class Tube implements Geometry{
     public Vector getNormal(Point3D p) {
         Point3D P0=_axisRay.getP0();
         Vector v=_axisRay.getDirection();
-        Vector P0_P=p.substract(P0);
+        Vector P0_P=p.subtract(P0);
         double t= alignZero(v.dotProduct(P0_P));
         //
         if(isZero(t)){
@@ -52,7 +52,7 @@ public class Tube implements Geometry{
         if(O.equals(p)){
             throw new IllegalArgumentException("point p cannot be on the tube axis");
         }
-        Vector n=p.substract(o);
+        Vector n=p.subtract(O);
         return n.normalized();
     }
 

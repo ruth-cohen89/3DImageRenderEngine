@@ -3,21 +3,20 @@ package primitives;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 import static primitives.Util.isZero;
 
 class VectorTest {
-    Vector v1= new Vector(1,2,3);
-    Vector v2= new Vector(-2,-4,-6);
-    Vector v3= new Vector(0,3,-2);
+    //t
+    Vector v1= new Vector(1,2,3);//bigger than 1
+    Vector v2= new Vector(0.5,0,0);//smaller than 1
+    Vector v3= new Vector(1,0,0);//exactly 1
 
     @Test
     void testTestEquals() {
     }
 
-    //@Test
-//    void testCrossProduct() {
-//    }
 
     @Test
     void testDotProduct() {
@@ -65,30 +64,69 @@ class VectorTest {
 
     @Test
     void testLengthSquared() {
+        if (!isZero(v1.lengthSquared() - 14))
+            out.println("ERROR: lengthSquared() wrong value");
     }
 
+    //assertEquals("...", new Vector(1,2,3).length(), 3.5...)
+    // Vector vCopy = new Vector(v1.getHead());
+    //   Vector vCopyNormalize = vCopy.normalize();'
+
+    //testing if Length() returns a true length of the vector
     @Test
     void testLength(){
-        Vector vCopy = new Vector(v.getHead());
-        Vector vCopyNormalize = vCopy.normalize();
-        assertTrue(isZero(vCopyNormalize.length()-1),"ERROR: normalize() result is not a unit vector");
+        if (!isZero(v1.length() - Math.sqrt(14)))
+            out.println("ERROR: Length() returns wrong value");
+       // assertEquals(v1.length(),Math.sqrt(14),"ERROR: Length() gives wrong value");
     }
 
     @Test
     void testNormalize() {
-        // test vector normalization vs vector length and cross-product
-        Vector v = new Vector(3.5,-5,10);
-        v.normalize();
-        assertEquals(1, v.length(),1e-10);
+        //testing a vector which is bigger than 1(equivalence class)
+        Vector u1 = v1;
+        u1.normalize();
+        assertEquals(1, u1.length(),1e-10);
 
-        assertThrows(IllegalArgumentException.class,
-                ()-> {Vector w=new Vector(0,0,0);},
-                "head cannot be (0,0,0)");
+        //testing a vector which is smaller than 1 (equivalence class)
+        Vector u2 = v2;
+        u2.normalize();
+        assertEquals(1, u2.length(),1e-10);
+
+        //testing a vector which is equivalent to 1 (boundary value)
+        Vector u3 = v3;
+        u3.normalize();
+        assertEquals(1, u3.length(),1e-10);
+        // test vector normalization vs vector length and cross-product
+
+        //Vector v = new Vector(3.5,-5,10);
+        //v.normalize();
+        //assertEquals(1, v.length(),1e-10);
+
+        //assertThrows(IllegalArgumentException.class,
+            //    ()-> {Vector w=new Vector(0,0,0);},
+              //  "head cannot be (0,0,0)");
     }
 
+    //"ERROR: normalized() function does not create a new vector"
+
+
+    //testing if Normalized() returns a true new normal to vector
     @Test
     void testNormalized() {
-        Vector u = v.normalized();
-        assertEquals (u,v,"ERROR: normalizated() function does not create a new vector");
+
+        //testing a vector which is bigger than 1(equivalence class)
+        Vector u1 = new Vector(1/Math.sqrt(14),2/Math.sqrt(14),3/Math.sqrt(14));
+        assertEquals (v1.normalized(),u1,"ERROR: normalized() gives wrong value");
+
+        //testing a vector which is smaller than 1 (equivalence class)
+        Vector u2 = new Vector(1,0,0);
+        assertEquals (v2.normalized(),u2,"ERROR: normalized() gives wrong value");
+
+        //testing a vector which is equivalent to 1 (boundary value)
+        Vector u3 = new Vector(1,0,0);
+        assertEquals (v3.normalized(),u3,"ERROR: normalized() gives wrong value");
+
+
     }
 }
+

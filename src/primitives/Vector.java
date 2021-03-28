@@ -3,14 +3,13 @@ package primitives;
 
 import static primitives.Point3D.zero;
 
+//**A foundational object in geometry with direction and size,
+// defined by the end point (when the starting point - the beginning of the axes).
+//**//
+
+//empty constructor
 public class Vector {
     Point3D _head;
-
-    /*returns head of vector, which represents it.*/
-    public Point3D getHead() {
-        //return head
-        return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
-    }
 
     /*constructor with head*/
     public Vector(Point3D head) {
@@ -31,6 +30,12 @@ public class Vector {
         if (!(o instanceof Vector)) return false;
         Vector vector = (Vector) o;
         return _head.equals(vector._head);
+    }
+
+    /*returns head of vector, which represents it.*/
+    public Point3D getHead() {
+        //return head
+        return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
     }
 
     /*Vector product*/
@@ -77,9 +82,6 @@ public class Vector {
     public Vector normalize() {
 
         double len = length();
-        // if (len == 0) {
-        // throw new ArithmeticException("cannot divide by 0");
-       // }
         double newX = _head._x._coord / len;
         double newY = _head._y._coord / len;
         double newZ = _head._z._coord / len;
@@ -95,7 +97,9 @@ public class Vector {
         return this;
     }
 
-    /*return a new normalized vector(does not change the original)*/
+    /*return a new normalized vector(does not change the original)
+    * a normal of a vector is in the same direction but with length 1
+    **/
     public Vector normalized() {
         Vector result = new Vector(_head);
         result.normalize();
