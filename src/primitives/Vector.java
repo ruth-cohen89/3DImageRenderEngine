@@ -3,7 +3,7 @@ package primitives;
 
 import static primitives.Point3D.zero;
 
-//**A foundational object in geometry with direction and size,
+//**Vector - A foundational object in geometry with direction and size,
 // defined by the end point (when the starting point - the beginning of the axes).
 //**//
 
@@ -19,7 +19,8 @@ public class Vector {
         _head = new Point3D(head._x._coord, head._y._coord, head._z._coord);
     }
 
-    /*constructor with doubles*/
+    /*constructor with doubles. calls first constructor
+    *"this" makes the program call the constructor of that same class*/
     public Vector(double x, double y, double z) {
         this(new Point3D(x, y, z));
     }
@@ -38,7 +39,7 @@ public class Vector {
         return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
     }
 
-    /*Vector product*/
+    /*Vector product(duplication)*/
     public Vector crossProduct(Vector v) {
         double u1 = _head._x._coord;
         double u2 = _head._y._coord;
@@ -78,7 +79,8 @@ public class Vector {
         return Math.sqrt(lengthSquared());
     }
 
-    /*normalize the vector itself*/
+    /*normalize the vector itself
+    * returns a vector in the same direction but with length 1*/
     public Vector normalize() {
 
         double len = length();

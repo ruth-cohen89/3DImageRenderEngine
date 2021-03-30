@@ -23,75 +23,82 @@ class VectorTest {
     }
 
 
-    @Test
+    @Test//if vector 0 is created then constructor throws an exception, else the message is displayed.
     void testVectorZero(){
-        assertThrows(IllegalArgumentException.class, ()-> new Vector(0,0,0), "nunun!");
+        assertThrows(IllegalArgumentException.class,
+                    ()-> new Vector(0,0,0),
+                    "no exception was thrown by vector constructor when creating a zero vector");
     }
+
     /**
      * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
      */
     @Test
     public void testCrossProduct() {
-       // Vector v3 = new Vector(0, 3, -2);
 
         // ============ Equivalence Partitions Tests ==============
         Vector v3 = new Vector(0, 3, -2);
         Vector vr = v1.crossProduct(v3);
 
         // TC01: Test that length of cross-product is proper (orthogonal vectors taken
-        // for simplicity)
+        // for simplicity) if the length of result vector and of the multiplication between the 2 is equal
+        //then it means testCrossProduct is done correctly.
+        //equal (true) if (expected - actual) < epsilon (delta), else send the message.
+
+        //assertTrue(isZero(
         assertEquals(v1.length() * v3.length(),
                  vr.length(),
                 0.00001,
-                "crossProduct() wrong result length");
+                "crossProduct() result is wrong");
 
         // TC02: Test cross-product result orthogonality to its operands
+        //if v1 is orthogonal to v3 then scalar-product multiplication between v1 and vr and also between v3 and vr should be zero.
+        //and it means crossProduct() result is orthogonal to both v1 & v3.
+        //if not true then throws an exception.
         assertTrue(isZero(vr.dotProduct(v1)),"crossProduct() result is not orthogonal to 1st operand");
         assertTrue(isZero(vr.dotProduct(v3)),"crossProduct() result is not orthogonal to 2nd operand");
 
         // =============== Boundary Values Tests ==================
-        // TC11: test zero vector from cross-productof co-lined vectors
-        //Vector v3 = new Vector(-2, -4, -6);
+        // TC11: test zero vector from cross-product of co-lined vectors
+        //compare 2 co-linear vectors and test if crossProduct on them returns 0
+        Vector v10 = new Vector(-2, -4, -6);
         assertThrows(IllegalArgumentException.class,
-                () -> v1.crossProduct(v2),
-                "crossProduct() for parallel vectors does not throw an exception"
+                () -> v1.crossProduct(v10),
+                "crossProduct() for co-lined vectors does not throw an exception"
                     );
-        // try {
-        //     v1.crossProduct(v2);
-        //     fail("crossProduct() for parallel vectors does not throw an exception");
-        // } catch (Exception e) {}
     }
 
+    //testing if testLengthSquared() returns a true value?????fix
     @Test
     void testLengthSquared() {
         if (!isZero(v1.lengthSquared() - 14))
             out.println("ERROR: lengthSquared() wrong value");
     }
 
-    //assertEquals("...", new Vector(1,2,3).length(), 3.5...)
-    // Vector vCopy = new Vector(v1.getHead());
-    //   Vector vCopyNormalize = vCopy.normalize();'
 
     //testing if Length() returns a true length of the vector
     @Test
     void testLength(){
-        if (!isZero(v1.length() - Math.sqrt(14)))
-            out.println("ERROR: Length() returns wrong value");
-       // assertEquals(v1.length(),Math.sqrt(14),"ERROR: Length() gives wrong value");
+        assertEquals(v1.length(),Math.sqrt(14),"ERROR: Length() gives wrong value");
     }
 
+    //testing if testNormalize() returns a true value???fix
     @Test
     void testNormalize() {
+
+        // ============ Equivalence Partitions Tests ==============
         //testing a vector which is bigger than 1(equivalence class)
         Vector u1 = v1;
         u1.normalize();
-        assertEquals(1, u1.length(),1e-10);
+        assertTrue(isZero(1-u1.length()),"Normalize() doesn't normalize correctly");
+       // assertEquals(1, u1.length(),0.00001);
 
         //testing a vector which is smaller than 1 (equivalence class)
         Vector u2 = v2;
         u2.normalize();
         assertEquals(1, u2.length(),1e-10);
 
+        // =============== Boundary Values Tests ==================
         //testing a vector which is equivalent to 1 (boundary value)
         Vector u3 = v3;
         u3.normalize();
@@ -114,6 +121,7 @@ class VectorTest {
     @Test
     void testNormalized() {
 
+        // ============ Equivalence Partitions Tests ==============
         //testing a vector which is bigger than 1(equivalence class)
         Vector u1 = new Vector(1/Math.sqrt(14),2/Math.sqrt(14),3/Math.sqrt(14));
         assertEquals (v1.normalized(),u1,"ERROR: normalized() gives wrong value");
@@ -122,6 +130,7 @@ class VectorTest {
         Vector u2 = new Vector(1,0,0);
         assertEquals (v2.normalized(),u2,"ERROR: normalized() gives wrong value");
 
+        // =============== Boundary Values Tests ==================
         //testing a vector which is equivalent to 1 (boundary value)
         Vector u3 = new Vector(1,0,0);
         assertEquals (v3.normalized(),u3,"ERROR: normalized() gives wrong value");
