@@ -5,6 +5,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static primitives.Util.isZero;
 
 class VectorTest {
@@ -43,13 +44,8 @@ class VectorTest {
         // TC01: Test that length of cross-product is proper (orthogonal vectors taken
         // for simplicity) if the length of result vector and of the multiplication between the 2 is equal
         //then it means testCrossProduct is done correctly.
-        //equal (true) if (expected - actual) < epsilon (delta), else send the message.
-
-        //assertTrue(isZero(
-        assertEquals(v1.length() * v3.length(),
-                 vr.length(),
-                0.00001,
-                "crossProduct() result is wrong");
+        assertTrue(isZero(v1.length() * v3.length()-vr.length()),
+                        "crossProduct() result is wrong");
 
         // TC02: Test cross-product result orthogonality to its operands
         //if v1 is orthogonal to v3 then scalar-product multiplication between v1 and vr and also between v3 and vr should be zero.
@@ -68,13 +64,14 @@ class VectorTest {
                     );
     }
 
-    //testing if testLengthSquared() returns a true value?????fix
+    //testing if testLengthSquared() returns a true value
     @Test
     void testLengthSquared() {
-        if (!isZero(v1.lengthSquared() - 14))
-            out.println("ERROR: lengthSquared() wrong value");
+            assertTrue(isZero(v1.lengthSquared() - 14),
+                    "ERROR: lengthSquared() wrong value");
     }
 
+    //if (!isZero(v1.lengthSquared() - 14))
 
     //testing if Length() returns a true length of the vector
     @Test
@@ -96,13 +93,16 @@ class VectorTest {
         //testing a vector which is smaller than 1 (equivalence class)
         Vector u2 = v2;
         u2.normalize();
-        assertEquals(1, u2.length(),1e-10);
+        assertTrue(isZero(1-u2.length()),"Normalize() doesn't normalize correctly");
+       // assertEquals(1, u2.length(),1e-10);
 
         // =============== Boundary Values Tests ==================
         //testing a vector which is equivalent to 1 (boundary value)
         Vector u3 = v3;
         u3.normalize();
-        assertEquals(1, u3.length(),1e-10);
+        assertTrue(isZero(1-u3.length()),"Normalize() doesn't normalize correctly");
+
+        //assertEquals(1, u3.length(),1e-10);
         // test vector normalization vs vector length and cross-product
 
         //Vector v = new Vector(3.5,-5,10);
