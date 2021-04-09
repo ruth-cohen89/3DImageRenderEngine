@@ -10,7 +10,7 @@ import static primitives.Util.isZero;
 
 /**
  * Unit tests for primitives.Vector class
- * @author Dan
+ * @author Odelia and Ruth
  */
 
 class VectorTest {
@@ -25,11 +25,16 @@ class VectorTest {
 
     @Test
     void testTestEquals() {
+
     }
 
 
     @Test
     void testDotProduct() {
+        //TC01:Test for two vectors if there are correct
+        assertTrue(isZero(v1.dotProduct(v2)-0.5), "dotProduct() result is wrong");
+        //TC11: Test for orthogonal vectors
+        assertTrue() //עצרתי פה
     }
 
 
@@ -144,6 +149,11 @@ class VectorTest {
         Vector u3 = new Vector(1,0,0);
         assertEquals (v3.normalized(),u3,"ERROR: normalized() gives wrong value");
 
+
+    }
+
+    @Test
+    void testScale() {
 
     }
 }
