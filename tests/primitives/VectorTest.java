@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static primitives.Util.isZero;
 
 class VectorTest {
-    //sample vectors
+    //sample
     Vector v1= new Vector(1,2,3);//bigger than 1
     Vector v2= new Vector(0.5,0,0);//smaller than 1
     Vector v3= new Vector(1,0,0);//exactly 1
