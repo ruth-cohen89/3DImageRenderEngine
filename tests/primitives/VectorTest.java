@@ -23,18 +23,13 @@ class VectorTest {
     Vector v2= new Vector(0.5,0,0);//smaller than 1
     Vector v3= new Vector(1,0,0);//exactly 1
 
-    @Test
-    void testTestEquals() {
-
-    }
-
 
     @Test
     void testDotProduct() {
-        //TC01:Test for two vectors if there are correct
+        //TC01:Test for two vectors if they are correct
         assertTrue(isZero(v1.dotProduct(v2)-0.5), "dotProduct() result is wrong");
         //TC11: Test for orthogonal vectors
-        assertTrue() //עצרתי פה
+        //assertTrue(); //עצרתי פה
     }
 
 
@@ -52,13 +47,13 @@ class VectorTest {
     public void testCrossProduct() {
 
         // ============ Equivalence Partitions Tests ==============
-        Vector v3 = new Vector(0, 3, -2);
-        Vector vr = v1.crossProduct(v3);
+        Vector v4 = new Vector(0, 3, -2);
+        Vector vr = v1.crossProduct(v4);
 
         // TC01: Test that length of cross-product is proper (orthogonal vectors taken
         // for simplicity) if the length of result vector and of the multiplication between the 2 is equal
         //then it means testCrossProduct is done correctly.
-        assertTrue(isZero(v1.length() * v3.length()-vr.length()),
+        assertTrue(isZero(v1.length() * v4.length()-vr.length()),
                         "crossProduct() result is wrong");
 
         // TC02: Test cross-product result orthogonality to its operands
@@ -66,7 +61,7 @@ class VectorTest {
         //and it means crossProduct() result is orthogonal to both v1 & v3.
         //if not true then throws an exception.
         assertTrue(isZero(vr.dotProduct(v1)),"crossProduct() result is not orthogonal to 1st operand");
-        assertTrue(isZero(vr.dotProduct(v3)),"crossProduct() result is not orthogonal to 2nd operand");
+        assertTrue(isZero(vr.dotProduct(v4)),"crossProduct() result is not orthogonal to 2nd operand");
 
         // =============== Boundary Values Tests ==================
         // TC11: test zero vector from cross-product of co-lined vectors
@@ -101,34 +96,22 @@ class VectorTest {
         //testing a vector which is bigger than 1(equivalence class)
         Vector u1 = v1;
         u1.normalize();
-        assertTrue(isZero(1-u1.length()),"Normalize() doesn't normalize correctly");
+        assertTrue(isZero(1-u1.length()),"ERROR: Normalize() doesn't normalize correctly");
        // assertEquals(1, u1.length(),0.00001);
 
         //testing a vector which is smaller than 1 (equivalence class)
         Vector u2 = v2;
         u2.normalize();
-        assertTrue(isZero(1-u2.length()),"Normalize() doesn't normalize correctly");
+        assertTrue(isZero(1-u2.length()),"ERROR: Normalize() doesn't normalize correctly");
        // assertEquals(1, u2.length(),1e-10);
 
         // =============== Boundary Values Tests ==================
         //testing a vector which is equivalent to 1 (boundary value)
         Vector u3 = v3;
         u3.normalize();
-        assertTrue(isZero(1-u3.length()),"Normalize() doesn't normalize correctly");
+        assertTrue(isZero(1-u3.length()),"ERROR: Normalize() doesn't normalize correctly");
 
-        //assertEquals(1, u3.length(),1e-10);
-        // test vector normalization vs vector length and cross-product
-
-        //Vector v = new Vector(3.5,-5,10);
-        //v.normalize();
-        //assertEquals(1, v.length(),1e-10);
-
-        //assertThrows(IllegalArgumentException.class,
-            //    ()-> {Vector w=new Vector(0,0,0);},
-              //  "head cannot be (0,0,0)");
     }
-
-    //"ERROR: normalized() function does not create a new vector"
 
 
     //testing if Normalized() returns a true new normal to vector
@@ -154,7 +137,10 @@ class VectorTest {
 
     @Test
     void testScale() {
-
+        // ============ Equivalence Partitions Tests ==============
+        //TC01:  A simple case of multiply vector in scalar
+        Vector vScale = v1.scale(-1);
+        assertEquals(vScale, new Vector(-1, -2, -3), "ERROR: Multiply vector in Scalar is incorrect");
     }
 }
 
