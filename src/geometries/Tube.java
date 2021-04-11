@@ -9,11 +9,12 @@ import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-/*a tube with a ray and a radius.*/
+/* hollow cylinder*/
 public class Tube implements Geometry{
     Ray _axisRay;
     double _radius;
 
+    //tube is a hollow cylinder, so no height
     public Tube(Ray ray, double radius){
         _radius= radius;
         _axisRay= ray;
@@ -43,7 +44,7 @@ public class Tube implements Geometry{
         Vector v=_axisRay.getDirection();
         Vector P0_P=p.subtract(P0);
         double t= alignZero(v.dotProduct(P0_P));
-        //
+
         if(isZero(t)){
             return P0_P.normalize();
         }

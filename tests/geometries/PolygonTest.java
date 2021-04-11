@@ -5,7 +5,10 @@ import primitives.Point3D;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit tests for geometries.Plane class
+ * @author Odelia and Ruth
+ */
 class PolygonTest {
 
     @Test
