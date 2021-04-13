@@ -60,7 +60,4 @@ class CylinderTest {
         assertEquals(normal5, ExpResult5);
     }
 
-    @Test
-    void testFindIntersections() {
-    }
 }

@@ -9,17 +9,17 @@ public class Point3D {
     /*defining point zero.*/
     public final static Point3D zero = new Point3D(0d, 0d, 0d);
 
-//    public double getX() {
-//        return _x;
-//    }
-//
-//    public double getY() {
-//        return _y;
-//    }
-//
-//    public double getZ() {
-//        return _z;
-//    }
+    public double getX() {
+        return _x._coord;
+    }
+
+    public double getY() {
+        return _y._coord;
+    }
+
+    public double getZ() {
+        return _z._coord;
+    }
 
     /**
      * defining a point with 3 double,
