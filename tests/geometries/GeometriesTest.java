@@ -47,12 +47,12 @@ class GeometriesTest {
         Geometries g4=new Geometries();
         g4.add(p1, t1, s1);
         Ray r4=new Ray(new Point3D(4, 3.5, 0), new Vector(-8, 0, 0));
-        assertEquals(g4.findIntersections(r4).size(), 2, "findIntersections() result is not intersecting one geometry");
+        assertEquals(2, g4.findIntersections(r4).size(), "findIntersections() result is not intersecting one geometry");
 
         //TC14: All the geometries from the collection are intersecting.
         Geometries g5=new Geometries();
         g5.add(p1,t1, s1);
         Ray r5=new Ray(new Point3D(1, 5, 0.5), new Vector(0, -12, 0));
-        assertEquals(g5.findIntersections(r5).size(), 4,"findIntersections() result is no geometry is intersecting");
+        assertEquals(1,g5.findIntersections(r5).size(), "findIntersections() result is no geometry is intersecting");
     }
 }

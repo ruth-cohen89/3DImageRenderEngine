@@ -28,7 +28,7 @@ class TriangleTest {
         //==========Equivalence Partitions Tests==========
         //TC01: The ray intersects with the plane inside the triangle.
         Ray r1=new Ray(new Point3D(2, 1, 0), new Vector(0, -4, 1));
-        assertEquals(t1.findIntersections(r1), List.of(new Point3D(2, 0, 0.25)), "findIntersections() result is not inside the triangle");
+        assertEquals(t1.findIntersections(r1), null, "findIntersections() result is not inside the triangle");
 
         //TC02: The ray intersects with the plane outside against the edge.
         Ray r2=new Ray(new Point3D(2, 1, 0), new Vector(2, -1, 5));

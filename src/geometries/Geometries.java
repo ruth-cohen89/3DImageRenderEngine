@@ -2,10 +2,11 @@ package geometries;
 
 import primitives.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries implements Intersectable {
-    private List<Intersectable> _geometries;
+    private List<Intersectable> _geometries=null;
     public Geometries() { //default constructor
         _geometries=new ArrayList<Intersectable>();
     }
