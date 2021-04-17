@@ -35,7 +35,7 @@ public class Vector {
 
     /*returns head of vector, which represents it.*/
     public Point3D getHead() {
-        //return head
+        //return _head;
         return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
     }
 
@@ -116,5 +116,7 @@ public class Vector {
         double z = _head._z._coord * num;
 
         return new Vector(x, y, z);
+
+
     }
 }

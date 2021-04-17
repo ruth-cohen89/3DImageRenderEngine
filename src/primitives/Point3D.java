@@ -9,17 +9,17 @@ public class Point3D {
     /*defining point zero.*/
     public final static Point3D zero = new Point3D(0d, 0d, 0d);
 
-//    public double getX() {
-//        return _x;
-//    }
-//
-//    public double getY() {
-//        return _y;
-//    }
-//
-//    public double getZ() {
-//        return _z;
-//    }
+    public double getX() {
+        return _x._coord;
+    }
+
+    public double getY() {
+        return _y._coord;
+    }
+
+    public double getZ() {
+        return _z._coord;
+    }
 
     /**
      * defining a point with 3 double,
@@ -57,7 +57,7 @@ public class Point3D {
                 _y._coord - pt2._y._coord,
                 _z._coord - pt2._z._coord
         );
-        if(zero.equals(head)) {
+       if(zero.equals(head)) {
             throw new IllegalArgumentException("Vector head can not be point(0,0,0)");//(because the tail is already 0...)
         }
         return new Vector(head);
@@ -75,7 +75,7 @@ public class Point3D {
      * returns distanceSquared between 2 vectors
      */
     public double distanceSquared(Point3D p) {
-        double xx= (_x._coord - p._x._coord) * (_x._coord- p._x._coord);
+       double xx= (_x._coord - p._x._coord) * (_x._coord- p._x._coord);
         double yy= (_y._coord- p._y._coord) * (_y._coord- p._y._coord);
         double zz= (_z._coord- p._z._coord) * (_z._coord- p._z._coord);
 

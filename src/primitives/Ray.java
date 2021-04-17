@@ -9,7 +9,7 @@ public class  Ray {
 
     public Ray(Point3D p0, Vector direction) { //constructor.
         _pOrigin = p0;
-        _direction = direction;
+        _direction = direction.normalize();
     }
 
     /**
@@ -25,7 +25,7 @@ public class  Ray {
      * @return _dir
      */
     public primitives.Vector getDirection() {
-        return new Vector(_direction._head);
+        return _direction;
     } //return the value of the vector.
 
     @Override
@@ -41,5 +41,9 @@ public class  Ray {
         return "Ray:" +
                 "p0=" + _pOrigin +
                 ", dir=" + _direction;
+    }
+
+    public Point3D getPoint(double t) {
+        return _pOrigin.add(_direction.scale(t));
     }
 }
