@@ -2,6 +2,7 @@ package primitives;
 
 
 public class Point3D {
+    public static final Point3D ZERO =new Point3D(0, 0, 0);
     final Coordinate _x;
     final Coordinate _y;
     final Coordinate _z;
