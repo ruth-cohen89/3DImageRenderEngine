@@ -17,27 +17,48 @@ public class Camera {
     private double _width;
     private double _distance;
 
-    private Camera(Builder builder) {
-        _p0=builder._p0;
-        _vTo=builder._vTo;
-        _vUp=builder._vUp;
-        _vRight=builder._vRight;
-        _height=builder._height;
-        _width=builder._width;
-        _distance=builder._distance;
+    public Camera(Point3D p0, Vector vTo, Vector vUp) {
+        _p0=p0;
+        _vTo=vTo.normalized();
+        _vUp=vUp.normalized();
+        _vRight=_vTo.crossProduct(_vUp);
     }
 
+    /**return the value of the point*/
+    public Point3D getP0() {
+        return _p0;
+    }
+
+    /**return the value of the vector who goes up*/
+    public Vector getvUp() {
+        return _vUp;
+    }
+
+    /**return the value of the vector who goes forward*/
+    public Vector getvTo() {
+        return _vTo;
+    }
+
+    /**return the value of the vector who goes right*/
+    public Vector getvRight() {
+        return _vRight;
+    }
+
+    /**setter for the height and width
+     * return the camera*/
     public Camera setViewPlaneSize(double width, double height) {
         _height=height;
         _width=width;
         return this;
     }
 
+    /**set the distance for the view plane*/
     public Camera setDistance(double distance) {
         _distance=distance;
         return this;
     }
 
+    /**intersections of ray with pixels im the view plane*/
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
         Point3D Pc=_p0.add(_vTo.scale(_distance));
 
@@ -59,7 +80,8 @@ public class Camera {
     }
     public static class Builder {
 
-         public Builder(Point3D p0, Vector vTo, Vector vUp) {
+        /**constructor*/
+        public Builder(Point3D p0, Vector vTo, Vector vUp) {
          _p0 = p0;
          _vTo = vTo.normalized();
          _vUp = vUp.normalized();
@@ -83,25 +105,6 @@ public class Camera {
         private double _distance=1;
 
     }
-/**
-    public Builder setHeight(double height) {
-        _height = height;
-        return this;
-    }
 
-    public Builder setWidth(double width) {
-        _width = width;
-        return this;
-    }
-
-    public Builder setDistance(double distance) {
-        _distance = distance;
-        return this;
-    }
-
-    public Camera build() {
-        Camera camera=new Camera(this);
-        return camera;
-    } */
 }
 
