@@ -1,5 +1,6 @@
 package primitives;
 
+import java.util.List;
 import java.util.Objects;
 
 //**ray- straight that extends to infinity in only one direction**//
@@ -45,5 +46,19 @@ public class  Ray {
 
     public Point3D getPoint(double t) {
         return _pOrigin.add(_direction.scale(t));
+    }
+
+    public Point3D findClosestPoint(List<Point3D> lst) { //the function gets a list of points and return the closest point to the ray.
+        Point3D p=null; //the closest point.
+        if(lst==null)
+            return p;
+        double minDis=Double.POSITIVE_INFINITY; //the minimum distance is set to the biggest number for the comparison.
+        for(Point3D p1:lst) { //for every point in the list of points.
+            double dis=_pOrigin.distance(p1); //the distance of the point from the ray.
+            if(dis<minDis)
+                minDis=dis;
+            p=p1;
+        }
+        return p;
     }
 }
