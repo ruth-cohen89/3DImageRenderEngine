@@ -6,11 +6,13 @@ import primitives.*;
 
 public class Scene {
     public String _name;        //Name of the scene
-    public Color _background=Color.BLACK;  //background color
-    public Geometries _geometries = new Geometries();
+    public Color _background=Color.BLACK;  //background color(default-black)
+    public Geometries _geometries = new Geometries(); //array of geometries(default-empty)
     public AmbientLight _ambientLight=new AmbientLight(Color.BLACK, 0);
 
-    Scene(String n1) { //constructor
+    //*constructor
+    // Sets name of scene and builds enpty collection of geometries*//
+    Scene(String n1) {
         this._name=n1;
         _geometries = new Geometries();
     }

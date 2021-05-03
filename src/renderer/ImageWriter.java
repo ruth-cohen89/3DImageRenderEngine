@@ -21,7 +21,7 @@ public class ImageWriter {
     private int nX;
     private int nY;
 
-    //define location
+    //define location(folder & name of file)
     private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
 
     private BufferedImage image;
@@ -83,11 +83,11 @@ public class ImageWriter {
 
     /**
      * The function writePixel writes a color of a specific pixel into pixel color
-     * matrix
+     * matrix(Gathering pixels into the matrix)
      *
      * @param xIndex X axis index of the pixel
      * @param yIndex Y axis index of the pixel
-     * @param color  final color of the pixel
+     * @param color  final color of the pixel (which is made by color class)
      */
     public void writePixel(int xIndex, int yIndex, Color color) {
         image.setRGB(xIndex, yIndex, color.getColor().getRGB());

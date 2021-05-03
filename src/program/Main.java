@@ -1,5 +1,5 @@
 /*Ruth Chedva Cohen 315174334 ruthcohe@g.jct.ac.il
-* Odelia Gamlieli 318029410 Odelia1307@gmail.com*/
+ * Odelia Gamlieli 318029410 Odelia1307@gmail.com*/
 
 import primitives.Point3D;
 import primitives.Vector;

@@ -1,5 +1,7 @@
 package primitives;
 
+import javax.swing.*;
+
 /**
  * Wrapper class for java.jwt.Color The constructors operate with any
  * non-negative RGB values. The colors are maintained without upper limit of
@@ -11,16 +13,17 @@ package primitives;
 public class Color {
     /**
      * The internal fields tx`o maintain RGB components as double numbers from 0 to
-     * whatever...
      */
     private double r = 0.0;
     private double g = 0.0;
     private double b = 0.0;
 
+    //When used, empty constructor is called and black color is generated
     public static final Color BLACK = new Color();
 
     /**
      * Default constructor - to generate Black Color (privately)
+     * (0,0,0)=black
      */
     private Color() {
     }
@@ -29,9 +32,9 @@ public class Color {
      * Constructor to generate a color according to RGB components Each component in
      * range 0..255 (for printed white color) or more [for lights]
      *
-     * @param r Red component
-     * @param g Green component
-     * @param b Blue component
+     * @param r Red component (amount of red in color)
+     * @param g Green component (amount of Green in color)
+     * @param b Blue component (amount of Blue in color)
      */
     public Color(double r, double g, double b) {
         if (r < 0 || g < 0 || b < 0)
