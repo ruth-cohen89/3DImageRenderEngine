@@ -11,27 +11,28 @@ public class RayTracerBasic extends RayTracerBase{
     // scene we want paint*//
     public RayTracerBasic(Scene s2) { super(s2); }
 
-    //* painting point in image
+    //* finds the intersection points of the ray with the scene's 3D model
+    //and returns the color of the closest one
     // Params:
     // ray – from the camera to the scene
     // Returns:
     //the color of the instruct point between scene amd ray*//
     public Color traceRay(Ray r1) {
-        //find the instruction points of the ray with the scene's 3D model
         List<Point3D> intersections = _scene._geometries.findIntersections(r1);
-        if(intersections==null){//if there are not instruction points return the background
+        if(intersections==null){ //if there are not intersection points return to background
             return _scene._background;
         }
-        //calculate the color in the instruction point which closest to head 0f ray
+
+        //finds the closest intersection point to head 0f ray
         Point3D closestPoint = r1.findClosestPoint(intersections);
         return calcColor(closestPoint);
 
     }
 
     /**
-     * calculate the color in a point
+     * calculate color of point
      * @param point
-     * @return the color of the point
+     * @return the color of the point (intensity of ambient light)
      */
     private Color calcColor(Point3D point) {
         return _scene._ambientLight.getIntensity();//Meanwhile return the color of the ambient lighting

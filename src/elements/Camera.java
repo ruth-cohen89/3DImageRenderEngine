@@ -6,26 +6,34 @@ import primitives.Vector;
 
 import static primitives.Util.isZero;
 
+/**
+ * The Camera class
+ */
 public class Camera {
-    private final Point3D _P0;
+    private Point3D _P0;  //The eye of the camera
     private final Vector _vTo;
     private final Vector _vUp;
     private final Vector _vRight;
 
-    //view plane parameters
-    private double _height;
-    private double _width;
-    private double _distance;
+    //View Plane parameters
+    double _width;
+    double _height;
+    double _distance;  //The distance between the View Plane to the camera
 
-    private Camera(Builder Builder) {
-        _P0 = Builder._P0;
-        _vTo = Builder._vTo;
-        _vUp = Builder._vUp;
-        _vRight = Builder._vRight;
-        _height = Builder._height;
-        _width = Builder._width;
-        _distance = Builder._distance;
+    private Camera(Bulider bulider) {
+        _P0 = bulider._P0;
+        _vTo = bulider._vTo;
+        _vUp = bulider._vUp;
+        _vRight = bulider._vRight;
+        _height = bulider._height;
+        _width = bulider._width;
+        _distance = bulider._distance;
     }
+
+    public Point3D getP0() {
+        return _P0;
+    }
+
 
     /**
      * set the length and width of ViewPlane
@@ -77,50 +85,59 @@ public class Camera {
 
     }
 
-    public static class Builder {
-        final private Point3D _P0;  //The eye of the camera
+    public static class Bulider {
+        private Point3D _P0;  //The eye of the camera
         final private Vector _vTo;
         final private Vector _vUp;
         final private Vector _vRight;
         //View Plane parameters
-        private double  _width=1;
-        private double _height=1;
-        private double _distance=1;  //The distance between the View Plane to the camera
+        private double _width = 1;
+        private double _height = 1;
+        private double _distance = 1;  //The distance between the View Plane to the camera
 
         /**
          * set the length and width of ViewPlane
-         * @param width  width of the ViewPlane
+         *
+         * @param width width of the ViewPlane
          * @return this
          */
-        public Builder setWidth(double width) {
+        public Bulider setWidth(double width) {
             _width = width;
             return this;
         }
+
         /**
          * set the length and width of ViewPlane
+         *
          * @param height height of the ViewPlane
          * @return this
          */
-        public Builder setHeight(double height) {
+        public Bulider setHeight(double height) {
             _height = height;
             return this;
         }
+
         /**
          * set the distance of ViewPlane
+         *
          * @param distance The distance between the View Plane to the camera
          * @return this
          */
-        public Builder setDistance(double distance) {
+        public Bulider setDistance(double distance) {
             _distance = distance;
             return this;
         }
 
-        public Camera build(){
-            Camera camera= new Camera(this);
+        public Point3D getP0() {
+            return _P0;
+        }
+
+        public Camera build() {
+            Camera camera = new Camera(this);
             return camera;
         }
 
-        public Builder(Point3D p0, Vector vTo, Vector vUp) {
+        public Bulider(Point3D p0, Vector vTo, Vector vUp) {
             _P0 = p0;
             _vTo = vTo.normalized();
             _vUp = vUp.normalized();
@@ -129,6 +146,23 @@ public class Camera {
             }
             _vRight = _vTo.crossProduct(_vUp); //This vector has been normalized
         }
+        /**
+         public Bulider transLocation(Point3D location){
+         _P0 = location;
+         return this;
+         }
+         public Bulider transLocation(Vector shifting){
+         _P0 = _P0.add(shifting);
+         return this;
+         }
+
+         public Bulider transRotation(double angelX, double angelY, double angelZ){
+
+         return this;
+         }
+         */
     }
 }
+
+
 

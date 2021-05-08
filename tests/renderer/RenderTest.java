@@ -1,6 +1,7 @@
-package elements;
+package renderer;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import elements.*;
 import geometries.*;
 import primitives.*;
@@ -12,10 +13,12 @@ import scene.Scene;
  *
  * @author Dan
  */
-public class RenderTests {
-    private Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-            .setDistance(100) //
-            .setViewPlaneSize(500, 500);
+ class RenderTests {
+    private Camera camera = new Camera.Bulider(Point3D.zero, new Vector(0, 0, -1), new Vector(0, 1, 0))
+            .setDistance(100)
+            .setHeight(500)
+            .setWidth(500)
+            .build();
 
     /**
      * Produce a scene with basic 3D model and render it into a jpeg image with a
@@ -28,7 +31,7 @@ public class RenderTests {
                 .setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1)) //
                 .setBackground(new Color(75, 127, 90));
 
-        scene.geometries.add(new Sphere(50, new Point3D(0, 0, -100)),
+        scene._geometries.add(new Sphere( new Point3D(0, 0, -100),50),
                 new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)), // up left
                 new Triangle(new Point3D(100, 0, -100), new Point3D(0, 100, -100), new Point3D(100, 100, -100)), // up right
                 new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)), // down left
@@ -39,8 +42,7 @@ public class RenderTests {
                 .setImageWriter(imageWriter) //
                 .setScene(scene) //
                 .setCamera(camera) //
-                .setRayTracer(new BasicRayTracer(scene));
-
+                .setRayTracerBase(new RayTracerBasic(scene));
         render.renderImage();
         render.printGrid(100, new Color(java.awt.Color.YELLOW));
         render.writeToImage();
@@ -60,7 +62,7 @@ public class RenderTests {
                 .setImageWriter(imageWriter) //
                 .setScene(scene) //
                 .setCamera(camera) //
-                .setRayTracer(new BasicRayTracer(scene));
+                .setRayTracerBase(new RayTracerBasic(scene));
 
         render.renderImage();
         render.printGrid(100, new Color(java.awt.Color.YELLOW));

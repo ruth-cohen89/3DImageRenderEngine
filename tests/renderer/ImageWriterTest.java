@@ -5,6 +5,7 @@ import primitives.Color;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//@author Ruth & Odelia
 class ImageWriterTest {
 
     @Test

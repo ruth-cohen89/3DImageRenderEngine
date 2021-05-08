@@ -6,7 +6,7 @@ import primitives.Ray;
 import scene.Scene;
 import java.util.MissingResourceException;
 
-//*Creates matrix of colors from scene**//
+//Creates the picture colors matrix from scene
 public class Render {
     private ImageWriter _imageWriter;
     private Scene _scene;
@@ -33,8 +33,13 @@ public class Render {
         return this;
     }
 
-    //*checks if null values were inserted, throws an exception in such case*//
+   //*renderImage demonstrates an image
+   // It builds a ray for each pixel and creates a color for each ray
+   //every color that is created fits to the right pixel in the picture
+   // *
     public void renderImage() {
+
+        //*checks if null values were inserted, throws an exception in such case*//
         if(_imageWriter==null) {
             throw new MissingResourceException("Image writer is missing", ImageWriter.class.getName(),"");
         }
@@ -54,9 +59,9 @@ public class Render {
         int nY = _imageWriter.getNy();
         for (int i = 0; i < nY; i++) {// go through all pixels of view plane
             for (int j = 0; j < nX; j++) {
-                Ray ray = _camera.constructRayThroughPixel(nX, nY, j, i);//builds a ray for each pixel
+                Ray ray = _camera.constructRayThroughPixel(nX, nY, j, i);//builds a ray for each (x,y) pixel
                 Color color = _rayTracerBase.traceRay(ray);//builds a color for every ray
-                _imageWriter.writePixel(j, i, color);// Color the pixel, (j,i)
+                _imageWriter.writePixel(j, i, color);// Color the pixel in picture, (j,i)
             }
         }
 

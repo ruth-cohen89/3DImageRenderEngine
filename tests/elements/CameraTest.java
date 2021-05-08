@@ -1,9 +1,9 @@
 package elements;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import elements.Camera;
 import primitives.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing Camera Class
@@ -13,16 +13,14 @@ import primitives.*;
  */
 public class CameraTest {
 
-    /**
-     * Test method for
-     * {@link elements.Camera#constructRayThroughPixel(int, int, int, int)}.
-     */
+    Camera camera = new Camera.Bulider(Point3D.zero, new Vector(0, 0, 1),
+            new Vector(0, -1, 0))
+            .setDistance(10)
+            .build();
+
     @Test
     public void testConstructRayThroughPixel() {
-        Camera camera = new Camera.Builder(Point3D.zero, new Vector(0, 0, 1),
-                new Vector(0, -1, 0))
-                .setDistance(10)
-                .build();
+
 
 // ============ Equivalence Partitions Tests ==============
 
@@ -61,7 +59,28 @@ public class CameraTest {
         assertEquals(new Ray(Point3D.zero, new Vector(-2, 0, 10)),
                 camera.setViewPlaneSize(6, 6).constructRayThroughPixel(3, 3, 0, 1),
                 "Bad ray");
-
     }
 
+        /**
+        //  Test method for
+        // * {@link elements.Camera#transLocation(Point3D)}
+         {@link elements.Camera#transLocation(Vector)}
+        //
+        @Test
+        public void testTransLocation () {
+            camera.transLocation(new Point3D(1, 3, 2)).transLocation(new Vector(2, 2, 7));
+            assertEquals(new Point3D(3, 5, 9), camera.getP0(), "Bad location");
+        }
+
+
+
+         * Test method for
+         * {@link elements.Camera#transRotation(double, double, double)}
+
+        @Test
+        public void transRotation () {
+
+        }
+        */
+    //}
 }

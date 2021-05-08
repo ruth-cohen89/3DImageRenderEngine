@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class Color {
     /**
-     * The internal fields tx`o maintain RGB components as double numbers from 0 to
+     * The internal fields tx`o maintain RGB components as double numbers
      */
     private double r = 0.0;
     private double g = 0.0;

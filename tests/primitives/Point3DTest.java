@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
+//@author Ruth & Odelia
 class Point3DTest {
 
     Point3D p1 = new Point3D(1, 2, 3);

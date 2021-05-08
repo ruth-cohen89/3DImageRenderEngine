@@ -20,10 +20,7 @@ import javax.imageio.*;
 public class ImageWriter {
     private int nX;
     private int nY;
-
-    //define location(folder & name of file)
-    private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
-
+    private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";//defines location
     private BufferedImage image;
     private String imageName;
 

@@ -48,7 +48,8 @@ public class  Ray {
         return _pOrigin.add(_direction.scale(t));
     }
 
-    public Point3D findClosestPoint(List<Point3D> lst) { //the function gets a list of points and returns the closest point to the ray.
+    //the function gets a list of points and returns the closest point to the ray.
+    public Point3D findClosestPoint(List<Point3D> lst) {
         Point3D p=null; //the closest point.
         if(lst==null)
             return p;

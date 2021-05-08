@@ -1,14 +1,15 @@
 package elements;
 
-
-import geometries.Plane;
-import geometries.Sphere;
-import geometries.Triangle;
+import geometries.*;
 import org.junit.jupiter.api.Test;
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.awt.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,20 +17,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * integration tests Class
  *
  * @author Ruth & Odelia
- *
  */
 /*integration tests of creating rays and finding intersections between them and geometries*/
-public class CameraIntegrationsTest {
+ class CameraIntegrationsTest {
 
     //*creating 2 cameras *//
-    Camera camera0 = new Camera.Builder(Point3D.zero, new Vector(0, 0, 1),
-            new Vector(0, -1, 0))
-            .setDistance(1)
+    Camera camera0 = new Camera.Bulider(Point3D.zero, new Vector(0, 0, 1),
+            new Vector(0, -1, 0)).
+            setDistance(1)
             .setWidth(3)
             .setHeight(3)
             .build();
 
-    Camera camera1 = new Camera.Builder(new Point3D(0, 0, -0.5),
+    Camera camera1 = new Camera.Bulider(new Point3D(0, 0, -0.5),
             new Vector(0, 0, 1),
             new Vector(0, -1, 0))
             .setDistance(1)
@@ -37,8 +37,8 @@ public class CameraIntegrationsTest {
             .setHeight(3)
             .build();
 
-    /**A private help function to prevent repeating the test calculation code for sphere
-     *
+    /**
+     * A private help function to prevent repeating the test calculation code for sphere
      *
      * @param Nx       width - Number of pixels on x axis
      * @param Ny       height - Number of pixels on y axis
