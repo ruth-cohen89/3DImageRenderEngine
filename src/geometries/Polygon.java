@@ -14,7 +14,7 @@ import static primitives.Util.isZero;
  *
  * @author Dan
  */
-public class Polygon implements Geometry { //(with many ribs)
+public class Polygon extends Geometry { //(with many ribs)
     /**
      * List of polygon's vertices.
      */
@@ -93,18 +93,13 @@ public class Polygon implements Geometry { //(with many ribs)
 
     @Override
     public String toString() {
-        return "Polygon{" +
-                "_vertices=" + _vertices +
-                ", _plane=" + _plane +
-                '}';
+        return "Polygon" +
+                "vertices=" + _vertices +
+                ", plane=" + _plane;
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        if(_plane.findIntersections(ray)==null){
-            return null;
-        }
-        //TODO
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         return null;
     }
 }

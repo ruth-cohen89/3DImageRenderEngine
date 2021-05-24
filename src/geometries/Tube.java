@@ -9,12 +9,20 @@ import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-/* hollow cylinder*/
-public class Tube implements Geometry{
+
+/**
+ * class for Tube
+ * @author Odelia & Ruth
+ */
+public class Tube extends Geometry{
     Ray _axisRay;
     double _radius;
 
-    //tube is a hollow cylinder, so no height
+    /**
+     * constructor
+     * @param ray
+     * @param radius
+     */
     public Tube(Ray ray, double radius){
         _radius= radius;
         _axisRay= ray;
@@ -58,7 +66,7 @@ public class Tube implements Geometry{
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         return null;
     }
 }

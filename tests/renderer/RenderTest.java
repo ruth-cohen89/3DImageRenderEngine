@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import elements.*;
 import geometries.*;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 
 /**
@@ -14,7 +13,7 @@ import scene.Scene;
  * @author Dan
  */
  class RenderTests {
-    private Camera camera = new Camera.Bulider(Point3D.zero, new Vector(0, 0, -1), new Vector(0, 1, 0))
+    private Camera camera = new Camera.Builder(Point3D.zero, new Vector(0, 0, -1), new Vector(0, 1, 0))
             .setDistance(100)
             .setHeight(500)
             .setWidth(500)
@@ -42,7 +41,7 @@ import scene.Scene;
                 .setImageWriter(imageWriter) //
                 .setScene(scene) //
                 .setCamera(camera) //
-                .setRayTracerBase(new RayTracerBasic(scene));
+                .setRayTracer(new RayTracerBasic(scene));
         render.renderImage();
         render.printGrid(100, new Color(java.awt.Color.YELLOW));
         render.writeToImage();
@@ -62,7 +61,7 @@ import scene.Scene;
                 .setImageWriter(imageWriter) //
                 .setScene(scene) //
                 .setCamera(camera) //
-                .setRayTracerBase(new RayTracerBasic(scene));
+                .setRayTracer(new RayTracerBasic(scene));
 
         render.renderImage();
         render.printGrid(100, new Color(java.awt.Color.YELLOW));

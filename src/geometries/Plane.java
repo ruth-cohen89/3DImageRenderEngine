@@ -9,13 +9,22 @@ import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-/*this class represents a plane.*/
-public class Plane implements Geometry {
+
+/**
+ * class for Plane
+ * @author Odelia & Ruth
+ */
+public class Plane extends Geometry {
 
     final Point3D _q0;
     final Vector _normal;
 
-    /*ctor with 3 points*/
+    /**
+     * constructor with 3 points
+     * @param p1
+     * @param p2
+     * @param p3
+     */
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
         _q0 = p1;
         Vector v1 = p2.subtract(p1);
@@ -77,8 +86,14 @@ public class Plane implements Geometry {
         //
     }
 
+
+    /**
+     *
+     * @param ray to the geometry
+     * @return list of geometries points that intersects with the geometry
+     */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         Point3D P0 = ray.getP0();
         Vector v = ray.getDirection();
 
@@ -106,7 +121,7 @@ public class Plane implements Geometry {
 
         Point3D P = P0.add(v.scale(t));
 
-        return List.of(P);
+        return List.of(new GeoPoint(this, P));
 
     }
 }

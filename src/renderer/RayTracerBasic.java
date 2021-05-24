@@ -5,6 +5,15 @@ import scene.Scene;
 
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
+
+import static primitives.Util.alignZero;
+
+
+/**
+ * class for Ray Tracer Base (the son)
+ * @author Odelia & Ruth
+ */
 public class RayTracerBasic extends RayTracerBase{
 
     //*constructor
@@ -18,15 +27,14 @@ public class RayTracerBasic extends RayTracerBase{
     // Returns:
     //the color of the instruct point between scene amd ray*//
     public Color traceRay(Ray r1) {
-        List<Point3D> intersections = _scene._geometries.findIntersections(r1);
+        List<GeoPoint> intersections = _scene._geometries.findGeoIntersections(r1);
         if(intersections==null){ //if there are not intersection points return to background
             return _scene._background;
         }
 
         //finds the closest intersection point to head 0f ray
-        Point3D closestPoint = r1.findClosestPoint(intersections);
+        GeoPoint closestPoint = r1.findClosestGeoPoint(intersections);
         return calcColor(closestPoint);
-
     }
 
     /**
@@ -34,7 +42,9 @@ public class RayTracerBasic extends RayTracerBase{
      * @param point
      * @return the color of the point (intensity of ambient light)
      */
-    private Color calcColor(Point3D point) {
-        return _scene._ambientLight.getIntensity();//Meanwhile return the color of the ambient lighting
+    private Color calcColor(GeoPoint point) {
+        Color color= _scene._ambientLight.getIntensity();
+        color=color.add(point.geometry.getEmission());//Meanwhile return the color of the ambient lighting
+        return color;
     }
 }

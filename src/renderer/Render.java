@@ -6,6 +6,10 @@ import primitives.Ray;
 import scene.Scene;
 import java.util.MissingResourceException;
 
+/**
+ * class for Render
+ * @author Odelia & Ruth
+ */
 //Creates the picture colors matrix from scene
 public class Render {
     private ImageWriter _imageWriter;
@@ -28,7 +32,7 @@ public class Render {
         return this;
     }
 
-    public Render setRayTracerBase(RayTracerBase rayTracerBase) {
+    public Render setRayTracer(RayTracerBase rayTracerBase) {
         this._rayTracerBase = rayTracerBase;
         return this;
     }
@@ -47,9 +51,9 @@ public class Render {
             throw new MissingResourceException("Camera is missing", Camera.class.getName(), "");
         }
 
-        if (_scene == null ){
-            throw new MissingResourceException("Scene is missing", Scene.class.getName(), "");
-        }
+     //   if (_scene == null ){
+     //       throw new MissingResourceException("Scene is missing", Scene.class.getName(), "");
+       // }
 
         if (_rayTracerBase == null ){
             throw new MissingResourceException("Ray tracer is missing", RayTracerBase.class.getName(), "");

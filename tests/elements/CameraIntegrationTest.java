@@ -4,11 +4,7 @@ import geometries.*;
 import org.junit.jupiter.api.Test;
 import primitives.*;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.awt.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  class CameraIntegrationsTest {
 
     //*creating 2 cameras *//
-    Camera camera0 = new Camera.Bulider(Point3D.zero, new Vector(0, 0, 1),
+    Camera camera0 = new Camera.Builder(Point3D.zero, new Vector(0, 0, 1),
             new Vector(0, -1, 0)).
             setDistance(1)
             .setWidth(3)
             .setHeight(3)
             .build();
 
-    Camera camera1 = new Camera.Bulider(new Point3D(0, 0, -0.5),
+    Camera camera1 = new Camera.Builder(new Point3D(0, 0, -0.5),
             new Vector(0, 0, 1),
             new Vector(0, -1, 0))
             .setDistance(1)
@@ -87,24 +83,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     /**
      * A private help function to prevent repeating the test calculation code for triangle
      *
-     * @param Nx       number of pixels on x axis
-     * @param Ny       number of pixels on y axis
      * @param triangle The Triangle
      * @param expected What assertEquals expects to receive
      * @param message  If not return what we expected to print the this message
      * @param cam      The camera
      */
 
-    public void triangleWithCam(int Nx, int Ny, Triangle triangle, int expected, String message, Camera cam) {
-        List<Point3D> results;
+    public void triangleWithCam(Triangle triangle, int expected, String message, Camera cam) {
+        cam.setViewPlaneSize(3, 3).setDistance(1);
         int count = 0;
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j) {
-                results = triangle.findIntersections(cam.constructRayThroughPixel(Nx, Ny, j, i));
+                List<Point3D> results = triangle.findIntersections(cam.constructRayThroughPixel(3, 3, j, i));
                 if (results != null)
                     count += results.size();
             }
-        }
         assertEquals(expected, count, "The result is not as expected");
     }
 
@@ -180,10 +173,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     //Triangle first test
     @Test
     void constructRayThroughPixelWithTriangle1() {
-        geometries.Triangle triangle = new Triangle(new Point3D(0, -1, 2),
+        Triangle triangle = new Triangle(new Point3D(0, -1, 2),
                 new Point3D(1, 1, 2),
                 new Point3D(-1, 1, 2));
-        triangleWithCam(3, 3, triangle, 1, "The result is not as expected", camera0);
+        triangleWithCam(triangle, 1, "The result is not as expected", camera0);
     }
 
     //Triangle second test
@@ -192,7 +185,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         Triangle triangle = new Triangle(new Point3D(0, -20, 2),
                 new Point3D(1, 1, 2),
                 new Point3D(-1, 1, 2));
-        triangleWithCam(3, 3, triangle, 2, "The result is not as expected", camera0);
+        triangleWithCam(triangle, 2, "The result is not as expected", camera0);
     }
 }
 

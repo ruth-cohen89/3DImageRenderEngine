@@ -1,6 +1,10 @@
 package primitives;
 
 
+/**
+ * class for Point 3D
+ * @author Odelia & Ruth
+ */
 public class Point3D {
     public static final Point3D ZERO =new Point3D(0, 0, 0);
     final Coordinate _x;

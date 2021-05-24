@@ -26,6 +26,7 @@ class RayTest {
 
         //TC01:The middle point in the list of points is the closest to the ray
         assertEquals(p3, new Ray(new Point3D(0, 0, 9), new Vector(0, 0, 1)).findClosestPoint(points), "ERROR: wrong closest point");
+
         // =============== Boundary Values Tests ==================
 
         // TC10: The list is empty31

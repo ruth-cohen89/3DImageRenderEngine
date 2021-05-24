@@ -7,7 +7,11 @@ import static primitives.Point3D.zero;
 // defined by the end point (when the starting point - the beginning of the axes).
 //**//
 
-//empty constructor
+
+/**
+ * class for Vector
+ * @author Odelia & Ruth
+ */
 public class Vector {
     Point3D _head;
 

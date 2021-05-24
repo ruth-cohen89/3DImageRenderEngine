@@ -6,11 +6,17 @@ import primitives.Vector;
 
 import java.util.List;
 
-/*.*/
+
+/**
+ * class for Cylinder
+ * @author Odelia & Ruth
+ */
 public class Cylinder extends Tube {//implements Geometry{
     final double _height;
 
-/*constructor with radius, ray and height*/
+/**
+ * constructor with radius, ray and height
+ */
     public Cylinder(Ray axisRay , double radius ,double height) {
         super(axisRay,radius);
         _height= height;
@@ -22,18 +28,12 @@ public class Cylinder extends Tube {//implements Geometry{
 
     @Override
     public String toString() {
-        return "Cylinder{" +
-                "_height=" + _height +
-                '}';
+        return "Cylinder" +
+                "height=" + _height;
     }
 
     @Override
     public Vector getNormal(Point3D point) {
         return null;
-    }
-
-    @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        return super.findIntersections(ray);
     }
 }

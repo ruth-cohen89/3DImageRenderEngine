@@ -87,7 +87,7 @@ class PlaneTest {
         assertEquals(p1.findIntersections(r6), null, "findIntersections() result does not intersect the plane");
 
         //TC15: The ray is orthogonal to the plane- the ray starts after the plane.
-        Ray r7= new Ray(new Point3D(1, -3, 3), new Vector(0, -2, 0));
+        Ray r7= new Ray(new Point3D(0, 0, 3), new Vector(0, 0, 1));
         assertEquals(p1.findIntersections(r7), null, "findIntersections() result does not meet the plane");
 
         //TC16: The ray is not orthogonal or parallel to the plane and begins at the plane.

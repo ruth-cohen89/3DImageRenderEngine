@@ -3,19 +3,30 @@ package elements;
 import primitives.*;
 
 /**
- * Class that defines the Ambient Light
+ * class for Ambient Lighting
+ * @author Odelia & Ruth
  */
-public class AmbientLight {
-    Color _intensity;    //Original refill light- IA
-    double _KA;          //Filling light attenuation coefficient KA
+public class AmbientLight extends Light{
+    /**
+     * @param _KA Discount factor
+     */
+    double _KA;
 
-    /*The constructor returns the final color intensity
-     (multiply the intensity in light attenuation)*/
-    public AmbientLight(Color intensity, double KA) {
-        _intensity = intensity.scale(KA);
+    /**
+     * constructor
+     * @param iA Original light intensity
+     * @param KA Discount factor
+     * The constructor calculate the final light intensity
+     */
+    public AmbientLight(Color iA, double KA) {
+        super(iA.scale(KA));
     }
 
-    public Color getIntensity() {
-        return _intensity;
+    /**
+     * default constructor
+     */
+    public AmbientLight() {
+        super(Color.BLACK);
     }
+
 }
