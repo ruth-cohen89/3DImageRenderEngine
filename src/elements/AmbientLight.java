@@ -3,30 +3,24 @@ package elements;
 import primitives.*;
 
 /**
- * class for Ambient Lighting
- * @author Odelia & Ruth
+ * Class that defines the Ambient Light
  */
-public class AmbientLight extends Light{
-    /**
-     * @param _KA Discount factor
-     */
-    double _KA;
-
-    /**
-     * constructor
-     * @param iA Original light intensity
-     * @param KA Discount factor
-     * The constructor calculate the final light intensity
-     */
-    public AmbientLight(Color iA, double KA) {
-        super(iA.scale(KA));
-    }
+public class AmbientLight extends Light {
 
     /**
      * default constructor
+     * transfers the color black to light's constructor
      */
-    public AmbientLight() {
+    public AmbientLight(){
         super(Color.BLACK);
     }
 
+    /**
+     * constructor for the environmental light , return final power of ambient lighting
+     * @param intensity Original light parameter- IA
+     * @param KA the light intensity damping parameter
+     */
+    public AmbientLight(Color intensity, double KA) {
+        super(intensity.scale(KA));  //The ultimate power of fill lighting
+    }
 }

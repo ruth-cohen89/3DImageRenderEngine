@@ -15,12 +15,14 @@ import javax.imageio.*;
  * responsible of holding image related parameters of View Plane - pixel matrix
  * size and resolution
  *
- * @author Ruth & Odelia
+ * @author Dan
  */
 public class ImageWriter {
     private int nX;
     private int nY;
-    private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";//defines location
+
+    private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
+
     private BufferedImage image;
     private String imageName;
 
@@ -80,11 +82,11 @@ public class ImageWriter {
 
     /**
      * The function writePixel writes a color of a specific pixel into pixel color
-     * matrix(Gathering pixels into the matrix)
+     * matrix
      *
      * @param xIndex X axis index of the pixel
      * @param yIndex Y axis index of the pixel
-     * @param color  final color of the pixel (which is made by color class)
+     * @param color  final color of the pixel
      */
     public void writePixel(int xIndex, int yIndex, Color color) {
         image.setRGB(xIndex, yIndex, color.getColor().getRGB());

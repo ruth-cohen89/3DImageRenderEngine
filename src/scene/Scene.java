@@ -10,7 +10,7 @@ import java.util.List;
 //**Scene of geometries
 public class Scene {
     public String _name;        //Name of the scene
-    public Color _background=Color.BLACK;  //background color(default-black)
+    public Color _background = Color.BLACK;  //background color(default-black)
     public Geometries _geometries = new Geometries(); //array of geometries(default-empty)
     public AmbientLight _ambientLight=new AmbientLight(Color.BLACK, 0);
     public List<LightSource> _lights;

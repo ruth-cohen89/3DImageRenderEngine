@@ -1,12 +1,8 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
-
 import java.util.List;
-
-import static primitives.Util.isZero;
+import primitives.*;
+import static primitives.Util.*;
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
@@ -14,15 +10,15 @@ import static primitives.Util.isZero;
  *
  * @author Dan
  */
-public class Polygon extends Geometry { //(with many ribs)
+public class Polygon extends Geometry { //מצולע
     /**
-     * List of polygon's vertices.
+     * List of polygon's vertices
      */
-    protected List<Point3D> _vertices;
+    protected List<Point3D> vertices;
     /**
      * Associated plane in which the polygon lays
      */
-    protected Plane _plane;
+    protected final Plane plane;
 
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
@@ -45,19 +41,18 @@ public class Polygon extends Geometry { //(with many ribs)
      *                                  <li>The polygon is concave (not convex)</li>
      *                                  </ul>
      */
-    public Polygon(Point3D... vertices) {//ctor
+    public Polygon(Point3D... vertices) {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
-        this._vertices = List.of(vertices);
+        this.vertices = List.of(vertices);
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
-        _plane = new Plane(vertices[0], vertices[1], vertices[2]);
+        plane = new Plane(vertices[0], vertices[1], vertices[2]);
         if (vertices.length == 3)
             return; // no need for more tests for a Triangle
 
-        Vector n = _plane.getNormal(null);
-       // Vector n = _plane.getNormal();
+        Vector n = plane.getNormal(null);
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
@@ -88,19 +83,56 @@ public class Polygon extends Geometry { //(with many ribs)
 
     @Override
     public Vector getNormal(Point3D point) {
-        return _plane.getNormal(null);
+        return plane.getNormal(null);
     }
 
+    /**
+     * Finding intersection GeoPoints with the Polygon geometric shape
+     * @param ray The ray that cuts the Polygon
+     * @param maxDistance The maximum possible distance
+     * @return List of GeoPoints of intersection and if not then returns null
+     */
     @Override
-    public String toString() {
-        return "Polygon" +
-                "vertices=" + _vertices +
-                ", plane=" + _plane;
-    }
+    public List<GeoPoint> findGeoIntersections(Ray ray,  double maxDistance) {
+        List<GeoPoint> result = plane.findGeoIntersections(ray, maxDistance);
 
-    @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return null;
+        if (result == null) {
+            return null;
+        }
+
+        Point3D P0 = ray.getP0();
+        Vector v = ray.getDirection();
+
+        Point3D P1 = vertices.get(1);
+        Point3D P2 = vertices.get(0);
+
+        Vector v1 = P1.subtract(P0);
+        Vector v2 = P2.subtract(P0);
+
+        double sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+
+        if (isZero(sign)) {
+            return null;
+        }
+
+        boolean positive = sign > 0;
+
+        //iterate through all vertices of the polygon
+        for (int i = vertices.size() - 1; i > 0; --i) {
+            v1 = v2;
+            v2 = vertices.get(i).subtract(P0);
+
+            sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+            if (isZero(sign)) {
+                return null;
+            }
+
+            if (positive != (sign > 0)) {
+                return null;
+            }
+        }
+
+        return List.of(new GeoPoint(this, result.get(0).point));
     }
 }
 

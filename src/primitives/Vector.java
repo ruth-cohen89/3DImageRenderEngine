@@ -17,6 +17,7 @@ public class Vector {
 
     /*constructor with head*/
     public Vector(Point3D head) {
+        //if zero throw error
         if (zero.equals(head)) {
             throw new IllegalArgumentException("Vector head can not be point(0,0,0)");
         }
@@ -24,7 +25,7 @@ public class Vector {
     }
 
     /*constructor with doubles. calls first constructor
-    *"this" makes the program call the constructor of that same class*/
+     *"this" makes the program call the constructor of that same class*/
     public Vector(double x, double y, double z) {
         this(new Point3D(x, y, z));
     }
@@ -69,7 +70,13 @@ public class Vector {
         return x + y + z;
     }
 
+    public Vector subtract(Vector v) {
+        double x = _head._x._coord - v._head._x._coord;
+        double y = _head._y._coord - v._head._y._coord;
+        double z = _head._z._coord - v._head._z._coord;
 
+        return new Vector(new Point3D(x, y, z));
+    }
     public double lengthSquared() {
         double xx = _head._x._coord * _head._x._coord;
         double yy = _head._y._coord * _head._y._coord;
@@ -84,7 +91,7 @@ public class Vector {
     }
 
     /*normalize the vector itself
-    * returns a vector in the same direction but with length 1*/
+     * returns a vector in the same direction but with length 1*/
     public Vector normalize() {
 
         double len = length();
@@ -104,8 +111,8 @@ public class Vector {
     }
 
     /*return a new normalized vector(does not change the original)
-    * a normal of a vector is in the same direction but with length 1
-    **/
+     * a normal of a vector is in the same direction but with length 1
+     **/
     public Vector normalized() {
         Vector result = new Vector(_head);
         result.normalize();

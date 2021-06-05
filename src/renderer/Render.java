@@ -37,10 +37,10 @@ public class Render {
         return this;
     }
 
-   //*renderImage demonstrates an image
-   // It builds a ray for each pixel and creates a color for each ray
-   //every color that is created fits to the right pixel in the picture
-   // *
+    //*renderImage demonstrates an image
+    // It builds a ray for each pixel and creates a color for each ray
+    //every color that is created fits to the right pixel in the picture
+    // *
     public void renderImage() {
 
         //*checks if null values were inserted, throws an exception in such case*//
@@ -51,9 +51,9 @@ public class Render {
             throw new MissingResourceException("Camera is missing", Camera.class.getName(), "");
         }
 
-     //   if (_scene == null ){
-     //       throw new MissingResourceException("Scene is missing", Scene.class.getName(), "");
-       // }
+        //   if (_scene == null ){
+        //       throw new MissingResourceException("Scene is missing", Scene.class.getName(), "");
+        // }
 
         if (_rayTracerBase == null ){
             throw new MissingResourceException("Ray tracer is missing", RayTracerBase.class.getName(), "");

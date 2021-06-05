@@ -1,32 +1,33 @@
 package geometries;
 
 import primitives.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Arrays;
 
 
 /**
- * class for Geometries
+ * collection of geometries treated as one geometry
+ * by composite framework (geometries is a list of Intersectable)
  * @author Odelia & Ruth
  */
 public class Geometries implements Intersectable {
-    private List<Intersectable> _geometries = null;
 
-    public Geometries() { //default constructor
-        _geometries = new ArrayList<Intersectable>();
+    final List<Intersectable> _geometries = new LinkedList<>();;
+
+    public Geometries(Intersectable... _geometries){
+        add(_geometries);
+
+    }
+    /**
+     * method that adds the geometries to the list
+     * @param geometries
+     */
+    public void add(Intersectable... geometries) {
+        _geometries.addAll(Arrays.asList(geometries));
     }
 
-    public Geometries(Intersectable... geometries) { //constructor
-        _geometries = new ArrayList<Intersectable>();
-        add(geometries);
-    }
 
-    public void add(Intersectable... geometries) { //adding to the collection
-        for (Intersectable geo : geometries) {
-            _geometries.add(geo);
-        }
-    }
 
     /**
      *
@@ -34,14 +35,14 @@ public class Geometries implements Intersectable {
      * @return list of intersections of the geometry with the points
      */
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> intersections = null;
         for (Intersectable geometry : _geometries) {
-            List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray);
+            List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray, maxDistance); //find intersections point to every single geometry
             //  if there are elements in geoIntersections – add them to intersections
             if (geoIntersections != null) {
                 if (intersections == null) {
-                    intersections = new LinkedList<GeoPoint>();
+                    intersections = new LinkedList<>();
                 }
                 intersections.addAll(geoIntersections);
             }

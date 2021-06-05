@@ -7,52 +7,47 @@ import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit tests for geometries.Geometries class
- * @author Odelia and Ruth
- */
-
 class GeometriesTest {
-
-    /** Test method for {@link geometries.Geometries#findIntersections(primitives.Ray)}. */
+    /**
+     * Test method for {@link geometries.Geometries#findIntersections(primitives.Ray)}.
+     */
 
     @Test
     void findIntersections() {
-        Plane p1=new Plane(new Point3D(3, 0, 4), new Point3D(0, 0, 1), new Point3D(1, 0, 0));
-        Triangle t1=new Triangle(new Point3D(3, -5, 0), new Point3D(1, -5, 0), new Point3D(-2, -5, 5));
-        Sphere s1=new Sphere(new Point3D(1, 3, 0), 1d);
 
-        // ============ Equivalence Partitions Tests ==============
+        Ray ray = new Ray(new Vector(0, 0, 1), new Point3D(0, 0, -1));//
 
-        //TC01: Not all the geometries intersects, but some of them are.
-        Geometries g1=new Geometries();
-        g1.add(p1, t1, s1);
-        Ray r1=new Ray(new Point3D(2, 1,0.5), new Vector(0, -8, 0));
-        assertEquals(g1.findIntersections(r1).size(), 1, "findIntersections() result is not empty");
+        //============ Equivalence Partitions Tests ==============
 
-        //============Boundary Values Tests==========
+        //TC01: few geometries have Intersections points
+        Geometries geometries1 = new Geometries(new Sphere(new Point3D(0, 0, 2), 1),
+                new Triangle(new Point3D(0, 1, 0), new Point3D(1, 0, 0), new Point3D(2, 0, 0)),
+                new Plane(new Point3D(0, 0, 4), new Vector(0, 0, 1)));
+        assertEquals(3, geometries1.findIntersections(ray).size(),
+                "ERROR: The ray should cut the geometries in three points (only few geometries should have Intersections points)");
 
-        //TC11: The collection is empty.
-        Geometries g2=new Geometries();
-        Ray r2=new Ray(new Point3D(-2, -2,-2), new Vector(3, 3, 2));
-        assertNull(g2.findIntersections(r2), "findIntersects() result is not empty");
+        // =============== Boundary Values Tests ==================
 
-        //TC12: The collection is not empty but none of the geometries intersects.
-        Geometries g3=new Geometries();
-        g3.add(p1, t1, s1);
-        Ray r3=new Ray(new Point3D(0,2, 0), new Vector(-3,0, 5));
-        assertEquals(g3.findIntersections(r3), null, "findIntersections() result can't be with intersects");
+        //TC11: The collection is empty
+        Geometries geometries2 = new Geometries();
+        assertNull(geometries2.findIntersections(ray), "ERROR: The collection is empty");
 
-        //TC13: Only one geometry from the collection is intersecting.
-        Geometries g4=new Geometries();
-        g4.add(p1, t1, s1);
-        Ray r4=new Ray(new Point3D(4, 3.5, 0), new Vector(-8, 0, 0));
-        assertEquals(2, g4.findIntersections(r4).size(), "findIntersections() result is not intersecting one geometry");
+        //TC12: all the geometries in the collection does not not have Intersections points
+        Geometries geometries3 = new Geometries(new Sphere(new Point3D(0, 0, -2), 1),
+                new Triangle(new Point3D(0, 1, 0), new Point3D(1, 0, 0), new Point3D(2, 0, 0)));
+        assertNull(geometries3.findIntersections(ray), "ERROR: The ray should not cut any geometry");
 
-        //TC14: All the geometries from the collection are intersecting.
-        Geometries g5=new Geometries();
-        g5.add(p1,t1, s1);
-        Ray r5=new Ray(new Point3D(1, 5, 0.5), new Vector(0, -12, 0));
-        assertEquals(1,g5.findIntersections(r5).size(), "findIntersections() result is no geometry is intersecting");
+        //TC13: only one geometries from the collection has Intersections point/s
+        Geometries geometries4 = new Geometries(new Sphere(new Point3D(0, 0, 2), 1),
+                new Triangle(new Point3D(0, 1, 0), new Point3D(1, 0, 0), new Point3D(2, 0, 0)));
+        assertEquals(2, geometries4.findIntersections(ray).size(), "ERROR: The ray should cut the geometries in two points");
+
+        //TC14: all the geometries in the collection have Intersections points
+        Geometries geometries5 = new Geometries(new Sphere(new Point3D(0, 0, 2), 1),
+                new Plane(new Point3D(0, 0, 4), new Vector(0, 0, 1)));
+        assertEquals(3, geometries5.findIntersections(ray).size(),
+                "ERROR: The ray should cut the geometries in three points (all the geometries in the collection should have Intersections points)");
     }
+
 }
+

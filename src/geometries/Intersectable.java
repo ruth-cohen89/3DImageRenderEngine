@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * interface for Intersectable
+ * represents intersectable
  * @author Odelia & Ruth
  */
 public interface Intersectable {
@@ -43,6 +44,8 @@ public interface Intersectable {
      *
      * @param ray to the geometry
      * @return list of points that intersects with the geometry
+     * (the cutting points of a ray in a geometry- נקודות חיתוך של הקרן עם הגוף)
+     *
      */
     default List<Point3D> findIntersections(Ray ray) {
         var geoList = findGeoIntersections(ray);
@@ -51,11 +54,16 @@ public interface Intersectable {
 
     }
     /**
-     *
+     *recieves a ray
      * @param ray to the geometry
-     * @return list of geometries points that intersects with the geometry
+     * @return list of GeoPoint-geometries and their intersection points
      */
-     public List<GeoPoint> findGeoIntersections(Ray ray);
+    public default List<GeoPoint> findGeoIntersections(Ray ray){return findGeoIntersections(ray, Double.POSITIVE_INFINITY);}
 
-
+    /**
+     *recieves ray and maxdDistance
+     * @param ray to the geometry
+     * @return list of GeoPoint-geometries and their intersection points
+     */
+    public  List<GeoPoint> findGeoIntersections (Ray ray, double maxdDistance );
 }

@@ -7,33 +7,20 @@ import primitives.Vector;
 import static primitives.Util.isZero;
 
 /**
- * class for Camera
- * @author Odelia & Ruth
+ * The Camera class
  */
 public class Camera {
+    private final Point3D _P0;  //The eye of the camera
+    private final Vector _vTo;
+    private final Vector _vUp;
+    private final Vector _vRight;
 
-    /**
-     * @param _p0 the location of the camera
-     * @param _vTo vector from camera to the view plane
-     * @param _vUp
-     * @param _vRight vector that is orthogonal to vTo and vUp
-     * @param _width the width of the view plane
-     * @param _height the height of the view plane
-     * @param _distance The distance between the View Plane to the camera
-     */
-    private Point3D _P0;
-    private Vector _vTo;
-    private Vector _vUp;
-    private Vector _vRight;
+    //View Plane parameters
     double _width;
     double _height;
-    double _distance;
+    double _distance;  //The distance between the View Plane to the camera
 
-    /**
-     * constructor
-     * @param builder
-     */
-    public Camera(Builder builder) {
+    private Camera(Builder builder) {
         _P0 = builder._P0;
         _vTo = builder._vTo;
         _vUp = builder._vUp;
@@ -44,45 +31,12 @@ public class Camera {
     }
 
     /**
-     * constructor
-     * @param p0
-     * @param vTo
-     * @param vUp
-     * @param vRight
-     * @param width
-     * @param height
-     * @param distance
-     */
-    public Camera(Point3D p0, Vector vTo, Vector vUp, Vector vRight, double width, double height, double distance) {
-        _P0 = p0;
-        _vTo = vTo;
-        _vUp = vUp;
-        _vRight = vRight;
-        _width = width;
-        _height = height;
-        _distance = distance;
-    }
-
-    public Camera(Point3D p0, Vector vTo, Vector vUp) {
-        _P0 = p0;
-        _vTo = vTo;
-        _vUp = vUp;
-        _vRight = _vTo.crossProduct(_vUp);
-
-    }
-
-    public Point3D getP0() {
-        return _P0;
-    }
-
-
-    /**
      * set the length and width of ViewPlane
      * @param width  width of the ViewPlane
      * @param height height of the ViewPlane
      * @return this
      */
-    public  Camera setViewPlaneSize(double width, double height) {
+    public Camera setViewPlaneSize(double width, double height) {
         _width = width;
         _height = height;
         return this;
@@ -112,7 +66,7 @@ public class Camera {
 
         Point3D pIJ= Pc;
         double Xj= (j - (nX-1)/2d) * Rx ; //Xj= (j - (nX-1)/2d) * Rx ->> Calculation from the presentation
-        double Yi= (-(i- (nY-1)/2d))* Ry; //Yi= -(i- (nY-1)/2d)* Ry;  ->> Calculation from the presentation
+        double Yi= -(i- (nY-1)/2d)* Ry; //Yi= -(i- (nY-1)/2d)* Ry;  ->> Calculation from the presentation
 
         if(!isZero(Xj)){
             pIJ = pIJ.add(_vRight.scale(Xj)); //pIJ= pIJ + _vRight*Xj ->> Calculation from the presentation
@@ -122,34 +76,31 @@ public class Camera {
         }
 
         Vector Vij= pIJ.subtract(_P0); //Vij= pIJ-P0
-        return new Ray(_P0, Vij);
+        return new Ray( Vij,_P0);
 
     }
 
     public static class Builder {
-        private Point3D _P0;  //The eye of the camera
+        final private Point3D _P0;  //The eye of the camera
         final private Vector _vTo;
         final private Vector _vUp;
         final private Vector _vRight;
         //View Plane parameters
-        private double _width = 1;
-        private double _height = 1;
-        private double _distance = 1;  //The distance between the View Plane to the camera
+        private double  _width=1;
+        private double _height=1;
+        private double _distance=1;  //The distance between the View Plane to the camera
 
         /**
          * set the length and width of ViewPlane
-         *
-         * @param width width of the ViewPlane
+         * @param width  width of the ViewPlane
          * @return this
          */
         public Builder setWidth(double width) {
             _width = width;
             return this;
         }
-
         /**
          * set the length and width of ViewPlane
-         *
          * @param height height of the ViewPlane
          * @return this
          */
@@ -157,10 +108,8 @@ public class Camera {
             _height = height;
             return this;
         }
-
         /**
          * set the distance of ViewPlane
-         *
          * @param distance The distance between the View Plane to the camera
          * @return this
          */
@@ -169,12 +118,8 @@ public class Camera {
             return this;
         }
 
-        public Point3D getP0() {
-            return _P0;
-        }
-
-        public Camera build() {
-            Camera camera = new Camera(this);
+        public Camera build(){
+            Camera camera= new Camera(this);
             return camera;
         }
 
@@ -187,20 +132,6 @@ public class Camera {
             }
             _vRight = _vTo.crossProduct(_vUp); //This vector has been normalized
         }
-         public Builder transLocation(Point3D location){
-         _P0 = location;
-         return this;
-         }
-         public Builder transLocation(Vector shifting){
-         _P0 = _P0.add(shifting);
-         return this;
-         }
-
-         public Builder transRotation(double angelX, double angelY, double angelZ){
-
-         return this;
-         }
-
     }
 }
 

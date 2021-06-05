@@ -1,37 +1,35 @@
-
 package elements;
-
-
 import org.junit.jupiter.api.Test;
-import elements.*;
 import geometries.*;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
-
 
 /**
  * Test rendering a basic image
  *
  * @author Dan
  */
-
 public class LightsTests {
     private Scene scene1 = new Scene("Test scene");
     private Scene scene2 = new Scene("Test scene") //
             .setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
-    private Camera camera1 = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-            .setViewPlaneSize(150, 150) //
-            .setDistance(1000);
-    private Camera camera2 = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-            .setViewPlaneSize(200, 200) //
-            .setDistance(1000);
+    private Camera camera1 = new Camera.Builder(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+            .setWidth(150)
+            .setHeight(150)
+            .setDistance(1000)
+            .build();
+    private Camera camera2 = new Camera.Builder(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+            .setWidth(200)
+            .setHeight(200)//
+            .setDistance(1000)
+            .build();
 
     private static Geometry triangle1 = new Triangle( //
             new Point3D(-150, -150, -150), new Point3D(150, -150, -150), new Point3D(75, 75, -150));
     private static Geometry triangle2 = new Triangle( //
             new Point3D(-150, -150, -150), new Point3D(-70, 70, -50), new Point3D(75, 75, -150));
-    private static Geometry sphere = new Sphere(new Point3D(0, 0, -50), 50) //
+    private static Geometry sphere = new Sphere( new Point3D(0, 0, -50),50) //
             .setEmission(new Color(java.awt.Color.BLUE)) //
             .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(100));
 
@@ -47,7 +45,7 @@ public class LightsTests {
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera1) //
-                .setRayTracer(new RayTracerBasic(scene1));
+                .setRayTracer(new BasicRayTracer(scene1));
         render.renderImage();
         render.writeToImage();
     }
@@ -65,7 +63,7 @@ public class LightsTests {
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera1) //
-                .setRayTracer(new RayTracerBasic(scene1));
+                .setRayTracer(new BasicRayTracer(scene1));
         render.renderImage();
         render.writeToImage();
     }
@@ -83,7 +81,7 @@ public class LightsTests {
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera1) //
-                .setRayTracer(new RayTracerBasic(scene1));
+                .setRayTracer(new BasicRayTracer(scene1));
         render.renderImage();
         render.writeToImage();
     }
@@ -101,7 +99,7 @@ public class LightsTests {
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
-                .setRayTracer(new RayTracerBasic(scene2));
+                .setRayTracer(new BasicRayTracer(scene2));
         render.renderImage();
         render.writeToImage();
     }
@@ -117,10 +115,10 @@ public class LightsTests {
                 .setkL(0.0005).setkQ(0.0005));
 
         ImageWriter imageWriter = new ImageWriter("lightTrianglesPoint", 500, 500);
-        Render render = new Render()//
-                .setImageWriter(imageWriter) //
-                .setCamera(camera2) //
-                .setRayTracer(new RayTracerBasic(scene2));
+        Render render = new Render()
+                .setImageWriter(imageWriter)
+                .setCamera(camera2)
+                .setRayTracer(new BasicRayTracer(scene2));
         render.renderImage();
         render.writeToImage();
     }
@@ -139,9 +137,10 @@ public class LightsTests {
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
-                .setRayTracer(new RayTracerBasic(scene2));
+                .setRayTracer(new BasicRayTracer(scene2));
         render.renderImage();
         render.writeToImage();
     }
 
 }
+

@@ -1,27 +1,28 @@
 package elements;
 
-import primitives.Color;
-
+import primitives.*;
 /**
- * abstract class for Light
- * @author Odelia & Ruth
+ * abstract Light Class - all light sources in scene extend light
  */
-abstract class Light {
+abstract class Light  {
     /**
-     * @param _intensity intensity of the light
+     * color of light intensity
      */
-    protected Color _intensity; //Original refill light- IA
+    protected final Color _intensity;   //Original light parameter- IA
 
     /**
-     * constructor
+     * constructor for Light
+     * @param intensity
      */
-    protected Light(Color intensity) {
-        this._intensity = intensity;
+    public Light(Color intensity) {
+        _intensity = intensity;
     }
-
+    /**
+     * get for Light
+     * @return _intensity
+     */
     public Color getIntensity() {
         return _intensity;
     }
-
 
 }

@@ -1,15 +1,28 @@
 package elements;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
-
+import primitives.*;
+import geometries.*;
 /**
- * interface for Light Source
- * @author Odelia & Ruth
+ * Interface for common actions of light sources
  */
 public interface LightSource {
+    /**
+     * @param p Point3D
+     * @return the intensity of light source in point p
+     */
     public Color getIntensity(Point3D p);
+
+    /**
+     * the distance between point to LightSource
+     * @param point
+     * @return
+     */
+    double getDistance(Point3D point);
+
+    /**
+     * @param p Point3D
+     * @return the Vector of light source in point p
+     */
     public Vector getL(Point3D p);
 
 }

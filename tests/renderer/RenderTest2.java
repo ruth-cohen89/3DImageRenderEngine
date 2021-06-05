@@ -17,9 +17,11 @@ public class RenderTest2 {
      *
      * @author Dan
      */
-        private Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-                .setDistance(100) //
-                .setViewPlaneSize(500, 500);
+    private final Camera camera = new Camera.Builder(Point3D.zero, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+            .setWidth(500)
+            .setHeight(500)
+            .setDistance(100)
+            .build();
 
         /**
          * Produce a scene with basic 3D model and render it into a png image with a
@@ -45,7 +47,7 @@ public class RenderTest2 {
             Render render = new Render() //
                     .setImageWriter(imageWriter) //
                     .setCamera(camera) //
-                    .setRayTracer(new RayTracerBasic(scene));
+                    .setRayTracer(new BasicRayTracer(scene));
 
             render.renderImage();
             render.printGrid(100, new Color(java.awt.Color.YELLOW));
@@ -65,7 +67,7 @@ public class RenderTest2 {
             Render render = new Render() //
                     .setImageWriter(imageWriter) //
                     .setCamera(camera) //
-                    .setRayTracer(new RayTracerBasic(scene));
+                    .setRayTracer(new BasicRayTracer(scene));
 
             render.renderImage();
             render.printGrid(100, new Color(java.awt.Color.YELLOW));
@@ -96,7 +98,7 @@ public class RenderTest2 {
             Render render = new Render() //
                     .setImageWriter(imageWriter) //
                     .setCamera(camera) //
-                    .setRayTracer(new RayTracerBasic(scene));
+                    .setRayTracer(new BasicRayTracer(scene));
 
             render.renderImage();
             render.printGrid(100, new Color(java.awt.Color.WHITE));
