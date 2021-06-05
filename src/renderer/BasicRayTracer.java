@@ -9,10 +9,10 @@ import geometries.Intersectable.*;
 import static primitives.Util.alignZero;
 
 public class BasicRayTracer extends RayTracerBase{
-    private static final double INITIAL_K = 1.0;      //@TODO
-    private static final int MAX_CALC_COLOR_LEVEL = 10; //@TODO
-    private static final double MIN_CALC_COLOR_K = 0.001; //@TODO
-    private static final double DELTA = 0.1; //@TODO
+    private static final double INITIAL_K = 1.0;      //
+    private static final int MAX_CALC_COLOR_LEVEL = 10; //
+    private static final double MIN_CALC_COLOR_K = 0.001; //
+    private static final double DELTA = 0.1; //
 
 
     //*constructor
