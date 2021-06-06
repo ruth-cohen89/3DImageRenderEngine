@@ -13,7 +13,6 @@ import java.util.MissingResourceException;
 //Creates the picture colors matrix from scene
 public class Render {
     private ImageWriter _imageWriter;
-    private Scene _scene;
     private Camera _camera;
     private RayTracerBase _rayTracerBase;
 
@@ -22,10 +21,6 @@ public class Render {
         return this;
     }
 
-    public Render setScene(Scene scene) {
-        this._scene = scene;
-        return this;
-    }
 
     public Render setCamera(Camera camera) {
         this._camera = camera;

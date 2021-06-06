@@ -4,8 +4,13 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
+/**
+ *  * the power of PointLight decreases from distance
+ *  * but constant all the way
+ */
 public class PointLight extends Light implements LightSource{
     private final Point3D _position; //PL
+    //factors for attenuation on light
     private double _kC=1; //Fixed coefficient מקדם קבוע
     private double _kL=0; //Linear coefficient
     private double _kQ=0; //Quadratic coefficient מקדם ריבועי
@@ -13,7 +18,7 @@ public class PointLight extends Light implements LightSource{
     /**
      * constructor
      *light with position
-     * @param intensity this is a I0
+     * @param intensity (I0)
      * @param position
      */
     public PointLight(Color intensity, Point3D position) {

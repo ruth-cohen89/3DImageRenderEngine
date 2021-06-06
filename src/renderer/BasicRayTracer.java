@@ -30,28 +30,32 @@ public class BasicRayTracer extends RayTracerBase{
     @Override
     public Color traceRay(Ray ray) {
 
-        List<GeoPoint> intersections = _scene._geometries.findGeoIntersections(ray);//intersections points of the ray with scene's 3D model
+        List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(ray);//intersections points of the ray with scene's 3D model
         if (intersections == null) {// if ray did not intersect any geometrical object
 
-            return _scene._background; //return background
+            return _scene.background; //return background
         }
         GeoPoint closestPoint = ray.findClosestGeoPoint(intersections);//find the closest intersection point to head of ray
-        return calcColor(closestPoint, ray);//calculate the color the point
+        return calcColor(closestPoint, ray) //calculate the color the point
+                .add(_scene.ambientLight.getIntensity()
+                .add(closestPoint.geometry.getEmission()));
     }
 
     /**
+     *
      * Gets a point and ray
      * @param geoPoint The geoPoint closest to the ray and its color should be checked
      * @return The original color of the dot in the scene
      */
     private Color calcColor(GeoPoint geoPoint, Ray ray) {
         Color emissionColor= geoPoint.geometry.getEmission();//the color of the object itself (by its point)
-        return _scene._ambientLight.getIntensity()
+        return _scene.ambientLight.getIntensity()
                 .add(emissionColor) //add emission to color of the ambient light
                 .add(calcLocalEffects(geoPoint,ray));//add effects from all light sources
     }
 
     /**
+     * check if the ray effects the light
      * Calculates all the local effects in scene caused by light
      * @param intersection
      * @param ray The ray that intersects geometry
@@ -69,7 +73,7 @@ public class BasicRayTracer extends RayTracerBase{
         double kd = material._kD;
         double ks = material._kS;
         Color color = Color.BLACK;
-        for (LightSource lightSource : _scene._lights) { //go through all light sources which are inside the scene
+        for (LightSource lightSource : _scene.lights) { //go through all light sources which are inside the scene
             Vector l = lightSource.getL(intersection.point);
             double nl = Util.alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) = sign(nv)
@@ -97,10 +101,18 @@ public class BasicRayTracer extends RayTracerBase{
         Vector lightDirection = v.scale(-1); // vector from point to light source
         Ray lightRay = new Ray(intersection.point, n, lightDirection);
 
-        List<GeoPoint> intersections = _scene._geometries//Check if there that geometries intersect lightRay
+        List<GeoPoint> intersections = _scene.geometries//Check if there that geometries intersect lightRay
                 .findGeoIntersections(lightRay, light.getDistance(intersection.point));
-        //If no geometry intersects lightRay return true- good
-        //otherwise return false- bad
+        if (intersections==null){
+            return true;
+        }
+        double lightDistance=light.getDistance(intersection.point);
+        for(GeoPoint gp: intersections){
+            if(alignZero(gp.point.distance(intersection.point)-lightDistance)<=0)
+                return false;
+        }
+        //If no geometry meets the lightRay - means unshaded - return true- good
+        //otherwise return false - bad
         return intersections == null ;
     }
 

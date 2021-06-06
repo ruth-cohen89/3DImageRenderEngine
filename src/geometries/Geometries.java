@@ -13,8 +13,12 @@ import java.util.Arrays;
  */
 public class Geometries implements Intersectable {
 
-    final List<Intersectable> _geometries = new LinkedList<>();;
+    final List<Intersectable> _intersectables = new LinkedList<>();;
 
+    /**
+     *
+     * @param _geometries non limited array of Geometry implementing Intersectable
+     */
     public Geometries(Intersectable... _geometries){
         add(_geometries);
 
@@ -24,7 +28,7 @@ public class Geometries implements Intersectable {
      * @param geometries
      */
     public void add(Intersectable... geometries) {
-        _geometries.addAll(Arrays.asList(geometries));
+        _intersectables.addAll(Arrays.asList(geometries));
     }
 
 
@@ -37,7 +41,7 @@ public class Geometries implements Intersectable {
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> intersections = null;
-        for (Intersectable geometry : _geometries) {
+        for (Intersectable geometry : _intersectables) {
             List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray, maxDistance); //find intersections point to every single geometry
             //  if there are elements in geoIntersections – add them to intersections
             if (geoIntersections != null) {

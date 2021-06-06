@@ -33,7 +33,7 @@ public class RenderTest2 {
                     .setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1)) //
                     .setBackground(new Color(75, 127, 90));
 
-            scene._geometries.add(new Sphere(new Point3D(0, 0, -100), 50),
+            scene.geometries.add(new Sphere(new Point3D(0, 0, -100), 50),
                     new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)), // up
                     // left
                     new Triangle(new Point3D(100, 0, -100), new Point3D(0, 100, -100), new Point3D(100, 100, -100)), // up
@@ -84,7 +84,7 @@ public class RenderTest2 {
             Scene scene = new Scene("Test scene")//
                     .setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.2)); //
 
-            scene._geometries.add(new Sphere(new Point3D(0, 0, -100), 50) //
+            scene.geometries.add(new Sphere(new Point3D(0, 0, -100), 50) //
                             .setEmission(new Color(java.awt.Color.CYAN)), //
                     new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)) // up left
                             .setEmission(new Color(java.awt.Color.GREEN)),

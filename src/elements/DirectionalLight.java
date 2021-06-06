@@ -4,10 +4,15 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
+/*
+the power of direction light does not decrease from distance
+*and the direction remains constant (not effected by other objects)
+ */
 public class DirectionalLight extends Light implements LightSource {
 
     /**
      * Direction of the light
+     * like direction of the sun vector rays towards the object
      */
     private final Vector _direction; //the direction of DirectionalLight
 

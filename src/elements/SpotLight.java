@@ -9,6 +9,7 @@ import static primitives.Util.isZero;
 
 /**
  * represents point light with direction
+*has a center, its power also decreases
  */
 public class SpotLight extends PointLight{
 

@@ -32,7 +32,7 @@ public class Material {
      * @param nShininess shininess of material
      * @return
      */
-    public Material setnShininess(int nShininess) {
+    public Material setShininess(int nShininess) {
         _nShininess = nShininess;
         return this;
     }
