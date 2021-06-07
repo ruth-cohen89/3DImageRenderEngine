@@ -40,7 +40,7 @@ public class Tube extends  Geometry{
     @Override
     public Vector getNormal(Point3D point) {
         Point3D P0= _ray.getP0();
-        Vector v= _ray.getDirection();
+        Vector v= _ray.getDir();
         Vector P0_P= point.subtract(P0);
 
         double t= v.dotProduct(P0_P);
@@ -62,8 +62,8 @@ public class Tube extends  Geometry{
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-        Vector v_ray = _ray.getDirection();
-        Vector v = ray.getDirection();
+        Vector v_ray = _ray.getDir();
+        Vector v = ray.getDir();
         Point3D p0 = ray.getP0();
 
         // At^2+Bt+C=0
@@ -79,7 +79,7 @@ public class Tube extends  Geometry{
         else {
             vVaVa = v_ray.scale(vVa);
             try {
-                vMinusVVaVa = v.subtract(vVaVa);
+                vMinusVVaVa = v.substract(vVaVa);
             } catch (IllegalArgumentException e1) { // the rays is parallel to axis
                 return null;
             }
@@ -106,7 +106,7 @@ public class Tube extends  Geometry{
         else {
             dPVaVa = v_ray.scale(dPVAxis);
             try {
-                dPMinusdPVaVa = deltaP.subtract(dPVaVa);
+                dPMinusdPVaVa = deltaP.substract(dPVaVa);
             } catch (IllegalArgumentException e1) {
                 double t = alignZero(Math.sqrt(_radius * _radius / a));
                 return t == 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));

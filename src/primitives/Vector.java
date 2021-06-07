@@ -70,7 +70,7 @@ public class Vector {
         return x + y + z;
     }
 
-    public Vector subtract(Vector v) {
+    public Vector substract(Vector v) {
         double x = _head._x._coord - v._head._x._coord;
         double y = _head._y._coord - v._head._y._coord;
         double z = _head._z._coord - v._head._z._coord;

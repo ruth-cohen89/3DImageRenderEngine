@@ -36,7 +36,7 @@ public class Triangle extends Polygon   {  //An heir from the polygon//
         if (intersections == null) return null;
 
         Point3D p0 = ray.getP0(); //point of the ray
-        Vector v = ray.getDirection(); // vector of the ray
+        Vector v = ray.getDir(); // vector of the ray
 
         Vector v1 = vertices.get(0).subtract(p0); //v1= p1-p0
         Vector v2 = vertices.get(1).subtract(p0); // v2=p2-p0

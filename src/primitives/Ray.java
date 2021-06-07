@@ -36,12 +36,11 @@ public class  Ray {
         // so that we do not accidentally discover that it cuts itself
         Vector delta = n.scale(n.dotProduct(direction) > 0 ? DELTA : - DELTA); //We want value of the calculation DELTA= n*n*direction this is DELTA or - DELTA
         _p0= point.add(delta); //_p0= point + delta
-        _dir= direction;
+        _dir= direction.normalized();
     }
 
     /**
      * getter for origin of the ray
-     *
      * @return _p0
      */
     public Point3D getP0() {
@@ -53,7 +52,7 @@ public class  Ray {
      *
      * @return _dir
      */
-    public Vector getDirection() {
+    public Vector getDir() {
         return new Vector(_dir._head);
     }
 
@@ -99,7 +98,10 @@ public class  Ray {
      * @return The closest point to the beginning of the ray
      */
     public GeoPoint findClosestGeoPoint(List<GeoPoint> listGeoPoints){
-        double d = 9999999;
+        if (listGeoPoints == null) {
+            return null;
+        }
+        double d = Double.MAX_VALUE;
         GeoPoint max = null;
         for (GeoPoint geo : listGeoPoints) {
             if (d >= _p0.distance(geo.point)) {

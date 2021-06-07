@@ -101,7 +101,7 @@ public class Polygon extends Geometry { //מצולע
         }
 
         Point3D P0 = ray.getP0();
-        Vector v = ray.getDirection();
+        Vector v = ray.getDir();
 
         Point3D P1 = vertices.get(1);
         Point3D P2 = vertices.get(0);

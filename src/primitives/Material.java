@@ -8,13 +8,17 @@ package primitives;
 public class Material {
     public double _kD=0;
     public double _kS=0;
-    public int _nShininess=0;
+    public double _kT=0;
+    public double _kR=0;//   1/0?
+
+    public int _Shininess =0;
+
 
     /**
      * @param kD factor of material
      * @return
      */
-    public Material setkD(double kD) {
+    public Material setKd(double kD) {
         _kD = kD;
         return this;
     }
@@ -23,17 +27,36 @@ public class Material {
      * @param kS factor of material
      * @return
      */
-    public Material setkS(double kS) {
+    public Material setKs(double kS) {
         _kS = kS;
         return this;
     }
+
+    /**
+     * @param kT factor of material
+     * @return
+     */
+    public Material setKt(double kT) {
+        _kT = kT;
+        return this;
+    }
+
+    /**
+     * @param kR factor of material
+     * @return
+     */
+    public Material setKr(double kR) {
+        _kR = kR;
+        return this;
+    }
+
 
     /**
      * @param nShininess shininess of material
      * @return
      */
     public Material setShininess(int nShininess) {
-        _nShininess = nShininess;
+        _Shininess = nShininess;
         return this;
     }
 }

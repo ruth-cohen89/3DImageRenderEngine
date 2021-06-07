@@ -15,6 +15,7 @@ public class PointLight extends Light implements LightSource{
     private double _kL=0; //Linear coefficient
     private double _kQ=0; //Quadratic coefficient מקדם ריבועי
 
+
     /**
      * constructor
      *light with position
@@ -33,10 +34,12 @@ public class PointLight extends Light implements LightSource{
     @Override
     public Color getIntensity(Point3D p) {
         double dsquared = p.distanceSquared(_position);//distance between point and position squared
-        double d = p.distance(_position);//distance between point and position
-        return (_intensity.reduce(_kC + _kL * d + _kQ * dsquared));
+       double d = p.distance(_position);//distance between point and position
+        //double d=alignZero(_position.distance(p));
+        return (_intensity.scale(1d/_kC + _kL * d + _kQ * dsquared));
 
     }
+
 
     /**
      * the distance between point and _position of PointLight
@@ -47,6 +50,8 @@ public class PointLight extends Light implements LightSource{
     public double getDistance(Point3D point) {
         return point.distance(_position);
     }
+
+
     /**
      * @param p Point3D
      * @return Point p - _position normalized
@@ -61,19 +66,30 @@ public class PointLight extends Light implements LightSource{
             return p.subtract(_position).normalize();//return distance between them normalized
     }
 
+    /**
+     * @param kC factor of material
+     * @return
+     */
 
-
-    public PointLight setkC(double kC) {
+    public PointLight setKC(double kC) {
         _kC = kC;
         return this;
     }
 
-    public PointLight setkL(double kL) {
+    /**
+     * @param kL factor of material
+     * @return
+     */
+    public PointLight setKl(double kL) {
         _kL = kL;
         return this;
     }
 
-    public PointLight setkQ(double kQ) {
+    /**
+     * @param kQ factor of material
+     * @return
+     */
+    public PointLight setKq(double kQ) {
         _kQ = kQ;
         return this;
     }

@@ -3,7 +3,7 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-import static primitives.Util.*;
+
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -81,7 +81,7 @@ public class Plane extends Geometry {
         return _normal;
     }
 
-    /**
+    /**fix???????????????????????????????????????????????????????????????
      * Finding intersection GeoPoints with the plane geometric shape
      * @param ray The ray that cuts the plane
      * @param maxDistance The maximum possible distance
@@ -89,8 +89,9 @@ public class Plane extends Geometry {
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+
         Point3D P0 = ray.getP0();
-        Vector v = ray.getDirection();
+        Vector v = ray.getDir();
 
         Vector n = _normal;
         if (_point3D.equals(P0)) {
