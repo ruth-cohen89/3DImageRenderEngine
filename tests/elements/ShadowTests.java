@@ -49,7 +49,7 @@ public class ShadowTests {
      */
     @Test
     public void trianglesSphere() {
-       // scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+       scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
 
         scene.geometries.add( //
                 new Triangle(new Point3D(-150, -150, -115), new Point3D(150, -150, -135), new Point3D(75, 75, -150)) //

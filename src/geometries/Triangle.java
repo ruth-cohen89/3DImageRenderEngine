@@ -9,7 +9,7 @@ import java.util.List;
 //Triangle: Polygon with vertices//
 public class Triangle extends Polygon   {  //An heir from the polygon//
 
-    //The constractor gets three points and activates the master builder accordingly//
+    //The constructor gets three points and activates the master builder accordingly//
     public Triangle(Point3D p1, Point3D p2, Point3D p3){
         super(p1,p2,p3);
     }
@@ -25,7 +25,8 @@ public class Triangle extends Polygon   {  //An heir from the polygon//
     public Vector getNormal( Point3D point){
         return super.getNormal(point);
     }
-    /**
+
+    /**                                                                       fix ADD DISTANCE
      * Finding intersection points with the Sphere geometric Triangle
      * @param ray The ray that cuts the Triangle
      * @return List of points of intersection and if not then returns null

@@ -59,15 +59,16 @@ public interface Intersectable {
      *recieves a ray
      * @param ray to the geometry
      * @return list of GeoPoint-geometries and their intersection points
+     * (bonus)
      */
     public default List<GeoPoint> findGeoIntersections(Ray ray){
         return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
 
     /**
-     *recieves ray and maxdDistance
+     *recieves ray and maxDistance
      * @param ray to the geometry
      * @return list of GeoPoint-geometries and their intersection points
      */
-    public  List<GeoPoint> findGeoIntersections (Ray ray, double maxdDistance );
+    public  List<GeoPoint> findGeoIntersections (Ray ray, double maxDistance );
 }

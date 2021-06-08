@@ -33,12 +33,14 @@ public class BasicRayTracer extends RayTracerBase{
     }
 
     /**
-     * finds intersections points of ray with geometrys and return the closest to head of ray
+     * finds intersections points of ray with geometries and return the closest to head of ray
      * @param ray
      * @return
      */
     private GeoPoint findClosestIntersection(Ray ray) {
         var points =_scene.geometries.findGeoIntersections(ray);
+        if (points==null)//if there are no intersections
+            return null;
         return ray.findClosestGeoPoint(points);
     }
 
@@ -116,6 +118,7 @@ public class BasicRayTracer extends RayTracerBase{
         //ray from point towrds light direction
         Ray lightRay = new Ray(geopoint.point,n,lightDirection);
 
+        //distance from point to the source of light= light
         double distance=light.getDistance(geopoint.point);
 
         List<GeoPoint> intersections = _scene.geometries

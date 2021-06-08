@@ -34,21 +34,22 @@ public class Geometries implements Intersectable {
 
 
     /**
-     *
+     *implements findGeoIntersections that was declares on Intersectable
      * @param ray
      * @return list of intersections of the geometry with the points
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> intersections = null;
-        for (Intersectable geometry : _intersectables) {
+        for (Intersectable geometry : _intersectables) { //for each Geometry find his GeoIntersections with ray
             List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray, maxDistance); //find intersections point to every single geometry
-            //  if there are elements in geoIntersections – add them to intersections
+            // list of points which their distance from head of ray is not bigger than maxDistance(maximum)
+
             if (geoIntersections != null) {
                 if (intersections == null) {
-                    intersections = new LinkedList<>();
+                    intersections = new LinkedList<>();//for first iteration create new list
                 }
-                intersections.addAll(geoIntersections);
+                intersections.addAll(geoIntersections);//otherwise, add them
             }
         }
         return intersections;

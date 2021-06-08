@@ -6,17 +6,17 @@ package primitives;
  * @author Odelia & Ruth
  */
 public class Material {
-    public double _kD=0;
-    public double _kS=0;
-    public double _kT=0;
-    public double _kR=0;//   1/0?
+    public double _kD=0.0;
+    public double _kS=0.0;
+    public double _kT=0.0;//transparency coefficient
+    public double _kR=0.0;//reflection coefficient
 
     public int _Shininess =0;
 
 
     /**
      * @param kD factor of material
-     * @return
+     * @return object
      */
     public Material setKd(double kD) {
         _kD = kD;
@@ -25,7 +25,7 @@ public class Material {
 
     /**
      * @param kS factor of material
-     * @return
+     * @return object
      */
     public Material setKs(double kS) {
         _kS = kS;
@@ -33,8 +33,9 @@ public class Material {
     }
 
     /**
+     * transparency coefficient
      * @param kT factor of material
-     * @return
+     * @return object
      */
     public Material setKt(double kT) {
         _kT = kT;
@@ -42,8 +43,9 @@ public class Material {
     }
 
     /**
+     * reflection coefficient
      * @param kR factor of material
-     * @return
+     * @return object
      */
     public Material setKr(double kR) {
         _kR = kR;
@@ -53,7 +55,7 @@ public class Material {
 
     /**
      * @param nShininess shininess of material
-     * @return
+     * @return object
      */
     public Material setShininess(int nShininess) {
         _Shininess = nShininess;
