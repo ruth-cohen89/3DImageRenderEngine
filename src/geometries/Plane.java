@@ -94,6 +94,7 @@ public class Plane extends Geometry {
         Vector v = ray.getDir();
 
         Vector n = _normal;
+
         if (_point3D.equals(P0)) {
             return null; //No intersection points
         }

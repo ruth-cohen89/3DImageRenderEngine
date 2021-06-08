@@ -97,7 +97,7 @@ public class Polygon extends Geometry { //מצולע
         List<GeoPoint> result = plane.findGeoIntersections(ray, maxDistance);
 
         if (result == null) {
-            return null;
+            return result;
         }
 
         Point3D P0 = ray.getP0();
