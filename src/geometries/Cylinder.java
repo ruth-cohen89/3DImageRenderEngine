@@ -11,12 +11,12 @@ import java.util.List;
  * class for Cylinder
  * @author Odelia & Ruth
  */
-public class Cylinder extends Tube {//implements Geometry{
+public class Cylinder extends Tube {//tube extends Geometry{
     final double _height;
 
-/**
- * constructor with radius, ray and height
- */
+    /**
+     * constructor with radius, ray and height
+     */
     public Cylinder(Ray axisRay , double radius ,double height) {
         super(axisRay,radius);
         _height= height;

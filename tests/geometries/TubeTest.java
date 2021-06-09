@@ -16,7 +16,7 @@ class TubeTest {
     @Test
     void testGetNormal() {
         //t1 is represented by radius and height(ray)
-        Tube t1 = new Tube(new Ray(new Point3D(0, 0, 1), new Vector(0, 0, 1)), 1);
+        Tube t1 = new Tube(new Ray(new Vector(0, 0, 1), new Point3D(0, 0, 1)), 1);
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple case of generate normal
         Vector v1 = new Vector(0, 1, 0);

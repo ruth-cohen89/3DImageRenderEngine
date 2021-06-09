@@ -1,16 +1,16 @@
 /*Ruth Chedva Cohen 315174334 ruthcohe@g.jct.ac.il
  * Odelia Gamlieli 318029410 Odelia1307@gmail.com*/
 
-import primitives.Point3D;
-import primitives.Vector;
+package program;
 
+import primitives.*;
 import static java.lang.System.out;
-import static primitives.Util.isZero;
-
+import static primitives.Util.*;
+import static primitives.Point3D.zero;
 /**
  * Test program for the 1st stage
  *
- * @author Dan Zilberstein.
+ * @author Dan Zilberstein
  */
 public final class Main{
     /**
@@ -28,7 +28,6 @@ public final class Main{
         Vector v1 = new Vector(1, 2, 3);
         Vector v2 = new Vector(-2, -4, -6);
         Vector v3 = new Vector(0, 3, -2);
-
         // test length..
         if (!isZero(v1.lengthSquared() - 14))
             out.println("ERROR: lengthSquared() wrong value");

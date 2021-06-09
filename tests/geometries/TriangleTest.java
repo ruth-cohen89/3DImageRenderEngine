@@ -27,29 +27,29 @@ class TriangleTest {
         Triangle t1= new Triangle(p1, p2, p3);
         //==========Equivalence Partitions Tests==========
         //TC01: The ray intersects with the plane inside the triangle.
-        Ray r1=new Ray(new Point3D(2, 1, 0), new Vector(0, -4, 1));
+        Ray r1=new Ray(new Vector(0, -4, 1), new Point3D(2, 1, 0));
         assertEquals(t1.findIntersections(r1), null, "findIntersections() result is not inside the triangle");
 
         //TC02: The ray intersects with the plane outside against the edge.
-        Ray r2=new Ray(new Point3D(2, 1, 0), new Vector(2, -1, 5));
+        Ray r2=new Ray(new Vector(2, -1, 5), new Point3D(2, 1, 0));
         assertEquals(t1.findIntersections(r2), null, "findIntersections() result is not outside against the edge");
 
         //TC03: The ray intersects with the plane outside against the vertex.
-        Ray r3=new Ray(new Point3D(0, 2, 3), new Vector(4, -2, -3.5));
+        Ray r3=new Ray(new Vector(4, -2, -3.5), new Point3D(0, 2, 3));
         assertEquals(t1.findIntersections(r3), null, "findIntersections() result is not outside against the vertex");
 
         //==========Boundary Values Tests ==========
 
         //TC11:The ray intersects with the plane on the edge.
-        Ray r4=new Ray(new Point3D(2, 1, 0), new Vector(4, -4, 0));
+        Ray r4=new Ray(new Vector(4, -4, 0), new Point3D(2, 1, 0));
         assertEquals(t1.findIntersections(r4), null, "findIntersections() result is not on the edge");
 
         //TC12:The ray intersects with the plane in the vertex.
-        Ray r5=new Ray(new Point3D(2, 1, 0), new Vector(0, -2, 0));
+        Ray r5=new Ray(new Vector(0, -2, 0), new Point3D(2, 1, 0));
         assertEquals(t1.findIntersections(r5), null, "findIntersections() result is not on the vertex");
 
         //TC13:The ray intersects with the plane on the edge's continuation.
-        Ray r6=new Ray(new Point3D(2, 1, 0), new Vector(6, -3, 0));
+        Ray r6=new Ray(new Vector(6, -3, 0), new Point3D(2, 1, 0));
         assertEquals(t1.findIntersections(r6), null, "findIntersections() result is not on edge's continuation");
 
     }

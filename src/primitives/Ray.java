@@ -1,91 +1,115 @@
 package primitives;
 
-import geometries.Geometries;
-import geometries.Intersectable;
+import geometries.*;
+import geometries.Intersectable.*;
 
 import java.util.List;
-import java.util.Objects;
-import geometries.Intersectable.GeoPoint;
 
-//**ray- straight that extends to infinity in only one direction**//
+/* Ray:This class represents the set of points on a straight line
+ that are on one relative side
+     To a given point on the line called the beginning of the foundation.
+     Defined by point and direction (unit vector) ...*/
 public class  Ray {
-    final Point3D _pOrigin; //point..
-    final Vector _direction; //direction vector.
+    private static final double DELTA = 0.1;
+    final Point3D _p0;
+    final Vector _dir;
 
-    public Ray(Point3D p0, Vector direction) { //constructor.
-        _pOrigin = p0;
-        _direction = direction.normalize();//a vector in the same direction but with length 1
+    public Ray(Vector dir, Point3D p0) {
+        if (dir.length() != 1) {
+            dir.normalize();
+        }
+        _p0 = p0;
+        _dir = dir;
+
+    }
+
+    /**
+     * Constructor with parameters.
+     * Move the ray's origin by DELTA or -DELTA in function of the sign of the dot product
+     * between the ray's direction and the normal.
+     * @param point
+     * @param n normal vector
+     * @param direction
+     */
+    public Ray(Point3D point, Vector n, Vector direction) {
+        //To deflect the Point a little above or below because of mathematical calculations
+        // so that we do not accidentally discover that it cuts itself
+        Vector delta = n.scale(n.dotProduct(direction) > 0 ? DELTA : - DELTA); //We want value of the calculation DELTA= n*n*direction this is DELTA or - DELTA
+        _p0= point.add(delta); //_p0= point + delta
+        _dir= direction.normalized();
     }
 
     /**
      * getter for origin of the ray
-     * @return p0
+     * @return _p0
      */
-    public primitives.Point3D getP0() {
-        return _pOrigin;
-    } //return the value of the point.
+    public Point3D getP0() {
+        return _p0;
+    }
 
     /**
      * getter for direction vector of the ray
+     *
      * @return _dir
      */
-    public primitives.Vector getDirection() {
-        return _direction;
-    } //return the value of the vector.
-
-    @Override
-    public boolean equals(Object o) { //compare between two objects.
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ray ray = (Ray) o;
-        return Objects.equals(_pOrigin, ray._pOrigin) && Objects.equals(_direction, ray._direction);
-    }
-
-    @Override
-    public String toString() { //return the values of the ray.
-        return "Ray:" +
-                "p0=" + _pOrigin +
-                ", dir=" + _direction;
+    public Vector getDir() {
+        return new Vector(_dir._head);
     }
 
     public Point3D getPoint(double t) {
-        return _pOrigin.add(_direction.scale(t));
+        Point3D p = _p0.add(_dir.scale(t));
+        return p;
     }
 
     /**
-     *findind the closest point to the ray
-     * @param lst list of intersection points
-     * @return the closest point
-     */    public Point3D findClosestPoint(List<Point3D> lst) {
-        Point3D p=null; //the closest point.
-        if(lst==null)
-            return p;
-        double minDis=Double.POSITIVE_INFINITY; //the minimum distance is set to the biggest number for the comparison.
-        for(Point3D p1:lst) { //for every point in the list of points.
-            double dis=_pOrigin.distance(p1); //the distance of the point from the beginning of the ray.
-            if(dis<minDis) {
-                minDis = dis;
-                p = p1;
+     * Comparison between two objects of ray
+     *
+     * @param o Of type Object to be converted to type Ray
+     * @return true if they equals,  return false if unequal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ray)) return false;
+        Ray ray = (Ray) o;
+        return _p0.equals(ray._p0) && _dir.equals(ray._dir);
+    }
+
+    /**
+     * The function checks from a list of points which point is closest to the beginning of the ray
+     * @param listPoints List of points
+     * @return The closest point to the beginning of the ray
+     */
+
+    public Point3D findClosestPoint(List<Point3D> listPoints) {
+        double d = 9999999;
+        Point3D max = null;
+        for (Point3D points : listPoints) {
+            if (d >= _p0.distance(points)) {
+                d = _p0.distance(points);
+                max = points;
             }
         }
-        return p;
+        return max;
+    }
+    /**
+     * The function checks from a list of GeoPoint which point is closest to the beginning of the ray
+     * @param listGeoPoints List of listGeoPoints
+     * @return The closest point to the beginning of the ray
+     */
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> listGeoPoints){
+        if (listGeoPoints == null) {
+            return null;
+        }
+        double d = Double.MAX_VALUE;
+        GeoPoint max = null;
+        for (GeoPoint geo : listGeoPoints) {
+            if (d >= _p0.distance(geo.point)) {
+                d = _p0.distance(geo.point);
+                max = geo;
+            }
+        }
+        return max;
     }
 
-    /**
-     *findind the closest geometric point to the ray
-     * @param lst list of intersection geometric points
-     * @return the closest geometric point
-     */
-    public GeoPoint findClosestGeoPoint(List<Intersectable.GeoPoint> lst) {
-        GeoPoint p=lst.get(0); //the closest point.
-        if(lst==null)
-            return null;
-        double minDis=Double.POSITIVE_INFINITY; //the minimum distance is set to the biggest number for the comparison.
-        for(GeoPoint geo:lst) { //for every point in the list of points.
-            double dis=geo.point.distance(_pOrigin); //the distance of the point from the beginning of the ray.
-            if(dis<minDis)
-                p=geo;
-        }
-        return p;
-    }
 }

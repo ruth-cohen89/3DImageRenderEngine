@@ -17,9 +17,11 @@ public class RenderTest2 {
      *
      * @author Dan
      */
-        private Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-                .setDistance(100) //
-                .setViewPlaneSize(500, 500);
+    private final Camera camera = new Camera.Builder(Point3D.zero, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+            .setWidth(500)
+            .setHeight(500)
+            .setDistance(100)
+            .build();
 
         /**
          * Produce a scene with basic 3D model and render it into a png image with a
@@ -31,7 +33,7 @@ public class RenderTest2 {
                     .setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1)) //
                     .setBackground(new Color(75, 127, 90));
 
-            scene._geometries.add(new Sphere(new Point3D(0, 0, -100), 50),
+            scene.geometries.add(new Sphere(new Point3D(0, 0, -100), 50),
                     new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)), // up
                     // left
                     new Triangle(new Point3D(100, 0, -100), new Point3D(0, 100, -100), new Point3D(100, 100, -100)), // up
@@ -45,7 +47,7 @@ public class RenderTest2 {
             Render render = new Render() //
                     .setImageWriter(imageWriter) //
                     .setCamera(camera) //
-                    .setRayTracer(new RayTracerBasic(scene));
+                    .setRayTracer(new BasicRayTracer(scene));
 
             render.renderImage();
             render.printGrid(100, new Color(java.awt.Color.YELLOW));
@@ -65,7 +67,7 @@ public class RenderTest2 {
             Render render = new Render() //
                     .setImageWriter(imageWriter) //
                     .setCamera(camera) //
-                    .setRayTracer(new RayTracerBasic(scene));
+                    .setRayTracer(new BasicRayTracer(scene));
 
             render.renderImage();
             render.printGrid(100, new Color(java.awt.Color.YELLOW));
@@ -82,7 +84,7 @@ public class RenderTest2 {
             Scene scene = new Scene("Test scene")//
                     .setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.2)); //
 
-            scene._geometries.add(new Sphere(new Point3D(0, 0, -100), 50) //
+            scene.geometries.add(new Sphere(new Point3D(0, 0, -100), 50) //
                             .setEmission(new Color(java.awt.Color.CYAN)), //
                     new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)) // up left
                             .setEmission(new Color(java.awt.Color.GREEN)),
@@ -96,7 +98,7 @@ public class RenderTest2 {
             Render render = new Render() //
                     .setImageWriter(imageWriter) //
                     .setCamera(camera) //
-                    .setRayTracer(new RayTracerBasic(scene));
+                    .setRayTracer(new BasicRayTracer(scene));
 
             render.renderImage();
             render.printGrid(100, new Color(java.awt.Color.WHITE));

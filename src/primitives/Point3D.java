@@ -62,12 +62,12 @@ public class Point3D {
                 _y._coord - pt2._y._coord,
                 _z._coord - pt2._z._coord
         );
-       if(zero.equals(head)) {
+        if(zero.equals(head)) {
             throw new IllegalArgumentException("Vector head can not be point(0,0,0)");//(because the tail is already 0...)
         }
         return new Vector(head);
 
-    /*addition bet 2 points (2 heads that rep 2 vectors), returning the result as a vector(head point)*/
+        /*addition bet 2 points (2 heads that rep 2 vectors), returning the result as a vector(head point)*/
     }
     public Point3D add(Vector v) {
         double x= _x._coord + v._head._x._coord;
@@ -80,14 +80,14 @@ public class Point3D {
      * returns distanceSquared between 2 vectors
      */
     public double distanceSquared(Point3D p) {
-       double xx= (_x._coord - p._x._coord) * (_x._coord- p._x._coord);
+        double xx= (_x._coord - p._x._coord) * (_x._coord- p._x._coord);
         double yy= (_y._coord- p._y._coord) * (_y._coord- p._y._coord);
         double zz= (_z._coord- p._z._coord) * (_z._coord- p._z._coord);
 
         return xx+ yy+ zz;
     }
 
-/*the distance between 2 vectors is sqrt of distanceSquared */
+    /*the distance between 2 vectors is sqrt of distanceSquared */
     public double distance(Point3D other) {
         return Math.sqrt(distanceSquared(other));
     }

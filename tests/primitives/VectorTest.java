@@ -1,3 +1,4 @@
+
 package primitives;
 
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,8 @@ class VectorTest {
     @Test//if vector 0 is created then constructor throws an exception, else the message is displayed.
     void testVectorZero(){
         assertThrows(IllegalArgumentException.class,
-                    ()-> new Vector(0,0,0),
-                    "no exception was thrown by vector constructor when creating a zero vector");
+                ()-> new Vector(0,0,0),
+                "no exception was thrown by vector constructor when creating a zero vector");
     }
 
     /**
@@ -54,7 +55,7 @@ class VectorTest {
         // for simplicity) if the length of result vector and of the multiplication between the 2 is equal
         //then it means testCrossProduct is done correctly.
         assertTrue(isZero(v1.length() * v4.length()-vr.length()),
-                        "crossProduct() result is wrong");
+                "crossProduct() result is wrong");
 
         // TC02: Test cross-product result orthogonality to its operands
         //if v1 is orthogonal to v3 then scalar-product multiplication between v1 and vr and also between v3 and vr should be zero.
@@ -70,14 +71,14 @@ class VectorTest {
         assertThrows(IllegalArgumentException.class,
                 () -> v1.crossProduct(v10),
                 "crossProduct() for co-lined vectors does not throw an exception"
-                    );
+        );
     }
 
     //testing if testLengthSquared() returns a true value
     @Test
     void testLengthSquared() {
-            assertTrue(isZero(v1.lengthSquared() - 14),
-                    "ERROR: lengthSquared() wrong value");
+        assertTrue(isZero(v1.lengthSquared() - 14),
+                "ERROR: lengthSquared() wrong value");
     }
 
     //if (!isZero(v1.lengthSquared() - 14))
@@ -97,13 +98,13 @@ class VectorTest {
         Vector u1 = v1;
         u1.normalize();
         assertTrue(isZero(1-u1.length()),"ERROR: Normalize() doesn't normalize correctly");
-       // assertEquals(1, u1.length(),0.00001);
+        // assertEquals(1, u1.length(),0.00001);
 
         //testing a vector which is smaller than 1 (equivalence class)
         Vector u2 = v2;
         u2.normalize();
         assertTrue(isZero(1-u2.length()),"ERROR: Normalize() doesn't normalize correctly");
-       // assertEquals(1, u2.length(),1e-10);
+        // assertEquals(1, u2.length(),1e-10);
 
         // =============== Boundary Values Tests ==================
         //testing a vector which is equivalent to 1 (boundary value)
@@ -143,4 +144,5 @@ class VectorTest {
         assertEquals(vScale, new Vector(-1, -2, -3), "ERROR: Multiply vector in Scalar is incorrect");
     }
 }
+
 

@@ -1,23 +1,25 @@
 package elements;
 
-import primitives.*;
+import primitives.Color;
+import primitives.Point3D;
+import primitives.Vector;
 
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 /**
- * class for Spot Light
- * @author Odelia & Ruth
+ * represents point light with direction
+*has a center, its power also decreases
  */
 public class SpotLight extends PointLight{
-    /**
-     * @param _direction the direction of the light
-     */
-    private Vector _direction;
+
+    private final Vector _direction;
 
     /**
-     * construtor
-     * @param intensity
+     * constructor for SpotLight
+     * @param intensity this is a I0
      * @param position
-     * @param direction
+     * @param direction of DirectionalLight
      */
     public SpotLight(Color intensity, Point3D position, Vector direction) {
         super(intensity, position);
@@ -25,21 +27,15 @@ public class SpotLight extends PointLight{
     }
 
     /**
-     * @param p point on object
-     * @return intensity light of the point
+     * @param p Point3D
+     * @return  the intensity of light source in point p
      */
     @Override
     public Color getIntensity(Point3D p) {
-        return super.getIntensity()
-                .scale(Math.max(0, _direction.dotProduct(getL(p))));
-    }
+        //Further doubling should be added
+        double cosTetha = _direction.dotProduct(getL(p)); //direction*l
+        Color intensity = super.getIntensity(p); //intensity from PointLight
+        return intensity.scale(Math.max(0, cosTetha));    //intensity * factor
 
-    /**
-     * @param p point on object
-     * @return the vector from the light source to the point
-     */
-    @Override
-    public Vector getL(Point3D p) {
-        return _direction;
     }
 }

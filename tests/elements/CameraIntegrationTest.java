@@ -1,3 +1,4 @@
+
 package elements;
 
 import geometries.*;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Ruth & Odelia
  */
 /*integration tests of creating rays and finding intersections between them and geometries*/
- class CameraIntegrationsTest {
+class CameraIntegrationsTest {
 
     //*creating 2 cameras *//
     Camera camera0 = new Camera.Builder(Point3D.zero, new Vector(0, 0, 1),

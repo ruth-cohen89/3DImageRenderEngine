@@ -1,14 +1,15 @@
 package renderer;
 
 import primitives.*;
-import scene.Scene;
-
+import primitives.*;
+import scene.*;
 /**
  * abstract class for ray tracing (finding colors of scene)
  *
  * @author Ruth & Odelia
  */
 public abstract class RayTracerBase {
+
     protected Scene _scene;
 
     /**

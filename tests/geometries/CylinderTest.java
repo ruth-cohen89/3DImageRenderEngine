@@ -21,7 +21,7 @@ class CylinderTest {
 
         Point3D point = new Point3D(0.0, 0.0, 0.0);
         Vector vector = new Vector(1.0, 0.0, 0.0);
-        Ray ray = new Ray(point, vector);
+        Ray ray = new Ray(vector, point);
         double radius = 2;
         double height = 2;
         Cylinder cylinder = new Cylinder(ray,radius, height);

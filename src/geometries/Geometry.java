@@ -1,17 +1,43 @@
+
 package geometries;
-
-import primitives.Color;
-import primitives.Material;
-import primitives.Point3D;
-import primitives.Vector;
-
+import primitives.*;
 /**
  * abstract class for all the geometries that have a normal from them
+ * Geometry in an extension of intersectable
  */
-public abstract class Geometry implements Intersectable{
+public abstract class Geometry implements Intersectable {
+    protected Color _emission = Color.BLACK; //פליטה של אור
+    private Material _material = new Material();
 
-    private Material _material;
+    /**
+     *
+     * @param point should be null for flat geometries
+     * @return the normal vector yo the geometries
+     */
+    abstract public  Vector getNormal(Point3D point);
 
+    /**
+     * get for emmission color field
+     * @return  emmission field
+     */
+    public Color getEmission() {
+        return _emission;
+    }
+
+    /**
+     * set the Emmission
+     * @param emission
+     * @return all this geometry
+     */
+    public Geometry setEmission(Color emission) {
+        _emission = emission;
+        return this;
+    }
+
+    /**
+     *
+     * @return get the Material
+     */
     public Material getMaterial() {
         return _material;
     }
@@ -21,22 +47,6 @@ public abstract class Geometry implements Intersectable{
         return this;
     }
 
-    /**
-     *
-     * @param point should be null for flat geometries
-     * @return the normal to the geometry
-     */
-    abstract public Vector getNormal(Point3D point);
-    protected Color  emission=Color.BLACK;
-
-    public Color getEmission() {
-        return emission;
-    }
-
-    public Geometry setEmission(Color emission) {
-        this.emission = emission;
-        return this;
-    }
-
-
 }
+
+
