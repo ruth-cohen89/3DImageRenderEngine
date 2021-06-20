@@ -15,10 +15,10 @@ public class Sphere extends Geometry {
 
     /**
      * constructor
-     * @param point3D
      * @param radius
+     * @param point3D
      */
-    public Sphere(Point3D point3D, double radius) {
+    public Sphere(double radius, Point3D point3D) {
         _radius = radius;
         _center = point3D;
     }
@@ -42,10 +42,9 @@ public class Sphere extends Geometry {
     //toString...//
     @Override
     public String toString() {
-        return "Sphere{" +
+        return "Sphere" +
                 "_point3D=" + _center +
-                ", _radius=" + _radius +
-                '}';
+                ", _radius=" + _radius;
     }
 
     /**
@@ -75,14 +74,17 @@ public class Sphere extends Geometry {
         Point3D P0 = ray.getP0();
         Vector v = ray.getDir();
 
-        if (P0.equals(_center)) {
-            return List.of(new GeoPoint(this, _center.add(v.scale(_radius))));
+        double d =0;
+        double tm =0;
+        if (!P0.equals(_center)) {
+            //return List.of(new GeoPoint(this, _center.add(v.scale(_radius))));
+
+            Vector U = _center.subtract(P0); // the vector from the center of the sphere - the ray dont touch the sphere
+
+            tm = alignZero(v.dotProduct(U)); //the projection of U on V
+            d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));
         }
 
-        Vector U = _center.subtract(P0); // the vector from the center of the sphere - the ray dont touch the sphere
-
-        double tm = alignZero(v.dotProduct(U)); //the projection of U on V
-        double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));
 
         // no intersections : the ray direction is above the sphere
         if (d >= _radius) { //d is bigger than the radius of the sphere -the ray dont touch the sphere
@@ -91,8 +93,8 @@ public class Sphere extends Geometry {
         }
 
         double th = alignZero(Math.sqrt(_radius * _radius - d * d));
-        double t1 = alignZero(tm - th);
-        double t2 = alignZero(tm + th);
+        double t1 = tm+th;
+        double t2 = tm-th;
 
         boolean validT1 = alignZero(t1 - maxDistance) <= 0;
         boolean validT2 = alignZero(t2 - maxDistance) <= 0;

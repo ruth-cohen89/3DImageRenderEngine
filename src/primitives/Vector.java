@@ -21,7 +21,8 @@ public class Vector {
         if (zero.equals(head)) {
             throw new IllegalArgumentException("Vector head can not be point(0,0,0)");
         }
-        _head = new Point3D(head._x._coord, head._y._coord, head._z._coord);
+        _head = head;
+                //new Point3D(head._x._coord, head._y._coord, head._z._coord);
     }
 
     /*constructor with doubles. calls first constructor
@@ -40,8 +41,8 @@ public class Vector {
 
     /*returns head of vector, which represents it.*/
     public Point3D getHead() {
-        //return _head;
-        return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
+        return _head;
+       // return new Point3D(_head._x._coord,_head._y._coord,_head._z._coord);
     }
 
     /*Vector product(duplication)*/
@@ -75,7 +76,7 @@ public class Vector {
         double y = _head._y._coord - v._head._y._coord;
         double z = _head._z._coord - v._head._z._coord;
 
-        return new Vector(new Point3D(x, y, z));
+        return new Vector(x, y, z);
     }
     public double lengthSquared() {
         double xx = _head._x._coord * _head._x._coord;
@@ -94,7 +95,7 @@ public class Vector {
      * returns a vector in the same direction but with length 1*/
     public Vector normalize() {
 
-        double len = length();
+        double len = this.length();
         double newX = _head._x._coord / len;
         double newY = _head._y._coord / len;
         double newZ = _head._z._coord / len;
@@ -129,5 +130,12 @@ public class Vector {
         return new Vector(x, y, z);
 
 
+    }
+
+    public Vector add(Vector v) {
+        double x = _head._x._coord + v._head._x._coord;
+        double y = _head._y._coord + v._head._y._coord;
+        double z = _head._z._coord + v._head._z._coord;
+        return new Vector(x, y, z);
     }
 }

@@ -11,9 +11,9 @@ import java.util.List;
 public class Scene {
     private final String _name;        //Name of the scene
     public Color background = Color.BLACK;  //background color(default-black)
-    public Geometries geometries = new Geometries(); //array of geometries(default-empty)
-    public AmbientLight ambientLight=new AmbientLight(Color.BLACK, 0);
-    public List<LightSource> lights;
+    public Geometries geometries; //array of geometries(default-empty)
+    public AmbientLight ambientLight=new AmbientLight();
+    public List<LightSource> lights=new LinkedList<>();
 
     //*constructor
     // Sets name of scene and builds empty collection of geometries*/
@@ -21,11 +21,10 @@ public class Scene {
     public Scene(String n1) {
         this._name=n1;
         geometries = new Geometries();
-        lights=new LinkedList<LightSource>();
     }
 
     public Scene setLights(List<LightSource> lights) {
-        lights = lights;
+        this.lights = lights;
         return this;
     }
 

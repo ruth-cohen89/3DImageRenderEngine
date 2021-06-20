@@ -37,7 +37,7 @@ public class Plane extends Geometry {
      * @param vector
      */
     public Plane(Point3D point3D, Vector vector){
-        _normal= vector.normalized();
+        _normal= vector;
         _point3D= point3D;
     }
 

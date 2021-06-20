@@ -49,9 +49,9 @@ public class Tube extends  Geometry{
             return  P0_P.normalize();
         }
         Point3D O= P0.add(v.scale(t));
-        if(O.equals(point)){
-            throw new IllegalArgumentException("point p cannot be on the tube's axis");
-        }
+//        if(O.equals(point)){
+//            throw new IllegalArgumentException("point p cannot be on the tube's axis");
+//        }
         return point.subtract(O).normalize();
 
     }

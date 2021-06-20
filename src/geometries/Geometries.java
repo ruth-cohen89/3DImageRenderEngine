@@ -13,15 +13,20 @@ import java.util.Arrays;
  */
 public class Geometries implements Intersectable {
 
-    final List<Intersectable> _intersectables = new LinkedList<>();;
+    private List<Intersectable> _intersectables = null;
 
     /**
      *
      * @param _geometries non limited array of Geometry implementing Intersectable
      */
     public Geometries(Intersectable... _geometries){
+        _intersectables=new LinkedList<Intersectable>();
         add(_geometries);
 
+    }
+
+    public Geometries() {
+        _intersectables = new LinkedList<Intersectable>();
     }
     /**
      * method that adds the geometries to the list
@@ -40,14 +45,14 @@ public class Geometries implements Intersectable {
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-        List<GeoPoint> intersections = null;
+        LinkedList<GeoPoint> intersections = null;
         for (Intersectable geometry : _intersectables) { //for each Geometry find his GeoIntersections with ray
             List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray, maxDistance); //find intersections point to every single geometry
             // list of points which their distance from head of ray is not bigger than maxDistance(maximum)
 
             if (geoIntersections != null) {
                 if (intersections == null) {
-                    intersections = new LinkedList<>();//for first iteration create new list
+                    intersections = new LinkedList<GeoPoint>();//for first iteration create new list
                 }
                 intersections.addAll(geoIntersections);//otherwise, add them
             }

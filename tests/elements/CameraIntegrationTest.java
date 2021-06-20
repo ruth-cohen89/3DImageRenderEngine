@@ -109,21 +109,21 @@ class CameraIntegrationsTest {
     //Sphere first test
     @Test
     void constructRayThroughPixelWithSphere1() {
-        Sphere sph = new Sphere(new Point3D(0, 0, 3), 1);
+        Sphere sph = new Sphere(1, new Point3D(0, 0, 3));
         sphereWithCam(3, 3, sph, 2, "The result is not as expected", camera0);
     }
 
     //Sphere second test
     @Test
     void constructRayThroughPixelWithSphere2() {
-        Sphere sph = new Sphere(new Point3D(0, 0, 2.5), 2.5);
+        Sphere sph = new Sphere(2.5, new Point3D(0, 0, 2.5));
         sphereWithCam(3, 3, sph, 18, "The result is not as expected", camera1);
     }
 
     //Sphere third test
     @Test
     void constructRayThroughPixelWithSphere3() {
-        Sphere sph = new Sphere(new Point3D(0, 0, 2), 2);
+        Sphere sph = new Sphere(2, new Point3D(0, 0, 2));
         sphereWithCam(3, 3, sph, 10, "The result is not as expected", camera1);
 
     }
@@ -131,14 +131,14 @@ class CameraIntegrationsTest {
     //Sphere fourth test
     @Test
     void constructRayThroughPixelWithSphere4() {
-        Sphere sph = new Sphere(new Point3D(0, 0, 1), 4);
+        Sphere sph = new Sphere(4, new Point3D(0, 0, 1));
         sphereWithCam(3, 3, sph, 9, "The result is not as expected", camera1);
     }
 
     //Sphere fifth test
     @Test
     void constructRayThroughPixelWithSphere5() {
-        Sphere sph = new Sphere(new Point3D(0, 0, -1), 0.5);
+        Sphere sph = new Sphere(0.5, new Point3D(0, 0, -1));
         sphereWithCam(3, 3, sph, 0, "The result is not as expected", camera1);
     }
 

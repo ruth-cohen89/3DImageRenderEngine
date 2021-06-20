@@ -18,7 +18,7 @@ class SphereTest {
     void getNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: calculates normal to a sphere
-        Sphere sphere = new Sphere(new Point3D(0, 0, 1), 1);
+        Sphere sphere = new Sphere(1, new Point3D(0, 0, 1));
         Vector v1 = new Vector(0, 0, 1);
         Vector v2 = sphere.getNormal(new Point3D(0, 0, 2));
         assertEquals(v1, v2, "ERROR: wrong normal");
@@ -28,7 +28,7 @@ class SphereTest {
      */
     @Test
     public void testFindIntersections() {
-        Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
+        Sphere sphere = new Sphere(1d, new Point3D(1, 0, 0));
 
         // ============ Equivalence Partitions Tests ==============
 

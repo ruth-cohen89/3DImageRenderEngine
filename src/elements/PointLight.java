@@ -3,13 +3,14 @@ package elements;
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
+import static primitives.Util.*;
 
 /**
  *  * the power of PointLight decreases from distance
  *  * but constant all the way
  */
 public class PointLight extends Light implements LightSource{
-    private final Point3D _position; //PL
+    private Point3D _position; //PL
     //factors for attenuation on light
     private double _kC=1; //Fixed coefficient מקדם קבוע
     private double _kL=0; //Linear coefficient
@@ -33,9 +34,9 @@ public class PointLight extends Light implements LightSource{
      */
     @Override
     public Color getIntensity(Point3D p) {
-        double dsquared = p.distanceSquared(_position);//distance between the point and the position of the spot light squared
-        double d = p.distance(_position);//distance between the point and the position of the spot light
-        return (_intensity.reduce(_kC + _kL * d + _kQ * dsquared));
+        //double dsquared = p.distanceSquared(_position);//distance between the point and the position of the spot light squared
+        double d = _position.distance(p);//distance between the point and the position of the spot light
+        return (_intensity.reduce(alignZero(_kC + _kL * d + _kQ * d*d)));
 
 
     }
@@ -58,11 +59,6 @@ public class PointLight extends Light implements LightSource{
      */
     @Override
     public Vector getL(Point3D p) {
-        if (p.equals(_position))//if point p and point position are at the same place - there is no distance
-        {
-            return null;
-        }
-        else
             return p.subtract(_position).normalize();//return distance between them normalized
     }
 
