@@ -83,7 +83,7 @@ public class Render {
                 }
             }
         }
-        else{
+        else {
             throw new MissingResourceException("The image writer is missing", ImageWriter.class.getName(), "");
         }
 

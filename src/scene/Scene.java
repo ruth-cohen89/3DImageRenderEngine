@@ -42,4 +42,8 @@ public class Scene {
         this.ambientLight = ambientLight;
         return this;
     }
+
+    public String getName() {
+        return _name;
+    }
 }
