@@ -19,25 +19,42 @@ class MiniProject1Test {
     public void kinderGarten()
 {
     Camera camera=new Camera.Builder(new Point3D(0, 0, 2000), new Vector(0, 0, -1), new Vector(0, 1, 0))
-            .setViewPlaneSize(600, 600).setDistance(1000).build();
+            .setViewPlaneSize(800, 600).setDistance(1000).build();
 
     scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
     //GEOMETRIES
     scene.geometries.add(
-    //         new Tube(new Ray(new Vector(0.2,0.5,0),new Point3D(110, 10, 0)), 10)
-      //      .setEmission(new Color(java.awt.Color.DARK_GRAY))
-        //    .setMaterial(new Material().setKs(0.5).setKd(0.5)),
+            new Polygon(new Point3D(500, 350, 100), new Point3D(520, 350, 100),   new Point3D(750, -400, 100),new Point3D(730, -400, 100))
+            .setEmission(new Color(java.awt.Color.BLUE))
+            .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
-//            new Tube(new Ray(new Vector(0.2,-0.5,0.6),new Point3D(90, 10, 0)), 10)
-//                    .setEmission(new Color(java.awt.Color.DARK_GRAY))
-//                    .setMaterial(new Material().setKs(0.5).setKd(0.5)),
+            new Polygon(new Point3D(570, 350, 100), new Point3D(590, 350, 100),   new Point3D(520, -400, 100),new Point3D(500, -400, 100))
+                    .setEmission(new Color(java.awt.Color.BLUE))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
-            new Cylinder(new Ray(new Vector(0.3,1,0),new Point3D(110, 10, 0)), 10, 5)
-                   .setEmission(new Color(java.awt.Color.DARK_GRAY))
-                    .setMaterial(new Material().setKs(0.5).setKd(0.5))
-           // new Sphere(35, new Point3D(100, 0, 10))
-             //       .setEmission(new Color(java.awt.Color.YELLOW))
-               //     .setMaterial(new Material().setKd(0.15).setKt(0.4).setKs(0.15).setKr(0.6).setShininess(20))
+            new Polygon(new Point3D(300, 255, 50), new Point3D(320, 255, 50),   new Point3D(320, -400, 50),new Point3D(300, -400, 50))
+                    .setEmission(new Color(java.awt.Color.BLUE))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            new Polygon(new Point3D(170, 246, 100), new Point3D(580, 246, 250),   new Point3D(580, 260, 250),new Point3D(170, 260, 100))
+                    .setEmission(new Color(java.awt.Color.BLUE))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            new Polygon(new Point3D(180, 245, 50), new Point3D(200, 245, 50),   new Point3D(200, -400, 50),new Point3D(180, -400, 50))
+                    .setEmission(new Color(java.awt.Color.BLUE))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            new Polygon(new Point3D(370, 260, 50), new Point3D(375, 260, 50),   new Point3D(375, -195, 50),new Point3D(370, -195, 50))
+                    .setEmission(new Color(java.awt.Color.darkGray))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            new Polygon(new Point3D(470, 265, 50), new Point3D(475, 265, 50),   new Point3D(475, -200, 50),new Point3D(470, -200, 50))
+                    .setEmission(new Color(java.awt.Color.darkGray))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            new Polygon(new Point3D(460, -190, 150), new Point3D(370, -190, 10),   new Point3D(370, -210, 10),new Point3D(460, -210, 150))
+                    .setEmission(new Color(java.awt.Color.darkGray))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5))
     );
     //LIGHTS
     scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(60, 50, 0), new Vector(0, 0, -1))
