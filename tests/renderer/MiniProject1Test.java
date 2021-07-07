@@ -45,7 +45,7 @@ class MiniProject1Test {
                     .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
             //straight line of bridge
-            new Polygon(new Point3D(180, 245, 50), new Point3D(200, 245, 50),   new Point3D(200, -400, 50),new Point3D(180, -400, 50))
+            new Polygon(new Point3D(180, 245, 20), new Point3D(200, 245, 20),   new Point3D(200, -400, 20),new Point3D(180, -400, 20))
                     .setEmission(new Color(java.awt.Color.BLUE))
                     .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
@@ -80,13 +80,28 @@ class MiniProject1Test {
                     .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
             //red rectangle of bridge
-            new Polygon(new Point3D(120, 91, 200), new Point3D(277, 91, 80),  new Point3D(277, -70, 80),new Point3D(120, -70, 200))
+            new Polygon(new Point3D(120, 91, 250), new Point3D(277, 91, 100),  new Point3D(277, -70, 100),new Point3D(120, -70, 250))
                     .setEmission(new Color(java.awt.Color.RED))
                     .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
-            //red rectangle of bridge
-            new Polygon(new Point3D(20, -340, 100), new Point3D(140, -340, 100),  new Point3D(140, -350, 100),new Point3D(20, -350, 100))
-                    .setEmission(new Color(java.awt.Color.LIGHT_GRAY))
+            //level of bridge
+            new Polygon(new Point3D(20, -330, 100), new Point3D(140, -330, 100),  new Point3D(140, -350, 100),new Point3D(20, -350, 100))
+                    .setEmission(new Color(java.awt.Color.GRAY))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            //back level of bridge
+    new Polygon(new Point3D(170, -330, 0), new Point3D(320, -330, 0),  new Point3D(320, -350, 0),new Point3D(170, -350,0))
+            .setEmission(new Color(java.awt.Color.GRAY))
+            .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            //back level of bridge
+            new Polygon(new Point3D(170, -330, 0), new Point3D(320, -330, 0),  new Point3D(320, -350, 0),new Point3D(170, -350,0))
+                    .setEmission(new Color(java.awt.Color.GRAY))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+            //bridge
+            new Polygon(new Point3D(40, -70, 150), new Point3D(-100, -70, 1000),  new Point3D(-100, -150, 1000),new Point3D(40, -150,150))
+                    .setEmission(new Color(java.awt.Color.GRAY))
                     .setMaterial(new Material().setKs(0.5).setKt(0.5))
 
     );
