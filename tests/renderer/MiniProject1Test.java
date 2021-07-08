@@ -74,7 +74,12 @@ class MiniProject1Test {
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
                 //surface 1 (2,1,4,3)
-                new Polygon(new Point3D(42, -49, 150), new Point3D(145, -26, 1000),  new Point3D(145, -33, 1000),new Point3D(42, -62, 150))
+                new Polygon(new Point3D(128, -49, 150), new Point3D(145, -26, 1000),  new Point3D(145, -31, 1000),new Point3D(128, -57, 150))
+                        .setEmission(new Color(java.awt.Color.GRAY))
+                        .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+                //surface 2 (2,1,4,3)
+                new Polygon(new Point3D(42, -49, 150), new Point3D(58, -26, 1000),  new Point3D(58, -31, 1000),new Point3D(42, -62, 150))
                         .setEmission(new Color(java.awt.Color.GRAY))
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
@@ -111,17 +116,17 @@ class MiniProject1Test {
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
                 //bridge 1
-                new Polygon(new Point3D(114, -51, 150), new Point3D(-26, -41, 1000),  new Point3D(-26, -50, 1000),new Point3D(114, -61,150))
+                new Polygon(new Point3D(109, -51, 150), new Point3D(-20, -41, 1000),  new Point3D(-20, -50, 1000),new Point3D(109, -61,150))
                         .setEmission(new Color(java.awt.Color.GRAY))
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
                 //bridge 2
-                new Polygon(new Point3D(-37, -75, 150), new Point3D(-57, -44, 1000),  new Point3D(-57, -52, 1000),new Point3D(-37, -90,150))
+                new Polygon(new Point3D(-37, -78, 150), new Point3D(-57, -44, 1000),  new Point3D(-57, -52, 1000),new Point3D(-37, -92,150))
                         .setEmission(new Color(java.awt.Color.GRAY))
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
                 //bridge 3
-                new Polygon(new Point3D(-105, -82, 150), new Point3D(-157, -27, 1000),  new Point3D(-157, -39, 1000),new Point3D(-105, -96,150))
+                new Polygon(new Point3D(-105, -79, 150), new Point3D(-161, -26, 1000),  new Point3D(-161, -32, 1000),new Point3D(-105, -96,150))
                         .setEmission(new Color(java.awt.Color.GRAY))
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
@@ -144,6 +149,22 @@ class MiniProject1Test {
                 //left straight line of bridge (D)
                 new Polygon(new Point3D(-450, 240, 50), new Point3D(-470, 240, 50),   new Point3D(-470, -400, 50),new Point3D(-450, -400, 50))
                     .setEmission(new Color(java.awt.Color.BLUE))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+                //red rectangle of bridge
+                new Polygon(new Point3D(-222, 91, 80), new Point3D(-345, 91, 230),  new Point3D(-345, -50, 230),new Point3D(-222, -50, 80))
+                    .setEmission(new Color(java.awt.Color.RED))
+                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+                //yellow rectangle of bridge
+                new Polygon(new Point3D(-394, 96, 80), new Point3D(-409, 91, 230),  new Point3D(-409, -50, 230),new Point3D(-394, -50, 80))
+                        .setEmission(new Color(java.awt.Color.YELLOW))
+                        .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+
+
+                //surface 2 (2,1,4,3)
+                new Polygon(new Point3D(-214, -49, 150), new Point3D(-231, -26, 1000),  new Point3D(-231, -33, 1000),new Point3D(-214, -62, 150))
+                    .setEmission(new Color(java.awt.Color.GRAY))
                     .setMaterial(new Material().setKs(0.5).setKt(0.5))
 
 
