@@ -37,7 +37,7 @@ class MiniProject1Test {
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
                 //straight line of swing
-                new Polygon(new Point3D(280, 255, 50), new Point3D(300, 255, 50),   new Point3D(300, -400, 50),new Point3D(280, -400, 50))
+                new Polygon(new Point3D(280, 245, 50), new Point3D(300, 245, 50),   new Point3D(300, -400, 50),new Point3D(280, -400, 50))
                         .setEmission(new Color(java.awt.Color.BLUE))
                         .setMaterial(new Material().setKs(0.5).setKt(0.5)),
 
