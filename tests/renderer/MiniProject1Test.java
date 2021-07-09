@@ -144,7 +144,7 @@ class MiniProject1Test {
                 //More left straight line of bridge (C)
                 new Polygon(new Point3D(-380, 240, 50), new Point3D(-400, 240, 50),   new Point3D(-400, -400, 50),new Point3D(-380, -400, 50))
                     .setEmission(new Color(java.awt.Color.BLUE))
-                    .setMaterial(new Material().setKs(0.5).setKt(0.5)),
+                    .setMaterial(new Material().setKs(0.5).setKt(0)),
 
                 //left straight line of bridge (D)
                 new Polygon(new Point3D(-450, 240, 50), new Point3D(-470, 240, 50),   new Point3D(-470, -400, 50),new Point3D(-450, -400, 50))
@@ -165,7 +165,7 @@ class MiniProject1Test {
                 //surface 2 (2,1,4,3)
                 new Polygon(new Point3D(-214, -49, 150), new Point3D(-231, -26, 1000),  new Point3D(-231, -33, 1000),new Point3D(-214, -62, 150))
                     .setEmission(new Color(java.awt.Color.GRAY))
-                    .setMaterial(new Material().setKs(0.5).setKt(0.5))
+                    .setMaterial(new Material().setKs(0.5).setKt(0))
 
 
         );
