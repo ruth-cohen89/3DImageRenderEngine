@@ -268,11 +268,12 @@ public class BasicRayTracer extends RayTracerBase {
         List<Ray>beam2=new LinkedList<>(); // for beam of refracted ray
 
         double kkr = k * material._kR;
-        if (kkr > MIN_CALC_COLOR_K) { //if the object reflects, if the reflection is bigger than the minimum of calc color
+        if (kkr > MIN_CALC_COLOR_K) { //if the object reflects, to calculate the color in the point of the object that is being reflected we calculate
+            //the color in the point that is affected by the reflection
 
             Ray reflectionRay = constructReflectedRay(geoPoint.point, ray.getDir(), n);
-            //color = calcGlobalEffects(reflectionRay, level, material.Kr, kkr);
-            if(this._numOfRays==0  || this._rayDistance<=0){
+            if(this._numOfRays==0  || this._rayDistance<=0){//if true so turn off improvement
+                // if the object is transparent calculate another intersection point in the same direction
                 beam1.add(reflectionRay);
             }
             else {
@@ -280,7 +281,8 @@ public class BasicRayTracer extends RayTracerBase {
             }
             for(Ray r : beam1) // r = reflectedRay
             {
-                ReflectedColor = ReflectedColor.add(calcGlobalEffect(r, level, material._kR, kkr)); // //calls the recursion to find the rest of the color
+                ReflectedColor = ReflectedColor.add(calcGlobalEffect(r, level, material._kR, kkr)); // recursion, (stops if level=0 / duplicate points,
+                // when its smaller the min color k then stop.)
             }
             if(beam1.size()>0) {
                 color = color.add(ReflectedColor.reduce(beam1.size()));
@@ -288,7 +290,7 @@ public class BasicRayTracer extends RayTracerBase {
         }
 
         double kkt = k * material._kT;
-        if (kkt > MIN_CALC_COLOR_K) { //if the refraction is bigger than the minimum of calc color
+        if (kkt > MIN_CALC_COLOR_K) { //if the refraction is bigger than the minimum of calc color than keep on recursion
             Ray refractionRay = constructRefractedRay(geoPoint.point, ray.getDir(), n);
             //color = color.add(calcGlobalEffects(refractionRay, level, material.Kt, kkt));
             if(this._numOfRays==0 ||this._rayDistance<=0)
@@ -317,7 +319,7 @@ public class BasicRayTracer extends RayTracerBase {
      */
     private Color calcGlobalEffect(Ray ray, int level, double kx, double kkx) {
         GeoPoint gp = findClosestIntersection(ray);
-        return ((gp == null ? _scene.background : calcColor(gp, ray, level - 1, kkx))
+        return ((gp == null ? _scene.background : calcColor(gp, ray, level - 1, kkx))//lower level
                 .scale(kx));
     }
 
