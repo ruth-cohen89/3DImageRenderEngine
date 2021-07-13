@@ -267,16 +267,16 @@ class MiniProject1Test {
         //LIGHTS
         scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(-550, 450, 0), new Vector(0, 0, -1))
                 .setKl(4E-5).setKq(2E-7));
-        scene.lights.add(new PointLight(new Color(170, 170, 170), new Point3D(400, 300, -50)));
-        scene.lights.add(new DirectionalLight(new Color(240, 240, 240), new Vector(0, -1, 0)));
-        scene.lights.add(new PointLight(new Color(170, 170, 170), new Point3D(-400, 300, -50)));
+        scene.lights.add(new PointLight(new Color(100, 100, 100), new Point3D(600, 600, 0)));
+        scene.lights.add(new DirectionalLight(new Color(100, 100, 100), new Vector(0, -1, 0)));
+        scene.lights.add(new PointLight(new Color(100, 100, 100), new Point3D(-600, 600, 0)));
 
         ImageWriter imageWriter = new ImageWriter("MiniProject1 Photo", 600, 600);
 
         Render render = new Render()
                 .setImageWriter(imageWriter)
                 .setCamera(camera)
-                .setRayTracer(new BasicRayTracer(scene).setRayDistance(1).setNumOfRays(80));
+                .setRayTracer(new BasicRayTracer(scene).setRayDistance(1).setNumOfRays(10));
         //System.out.print( scene.getName());
         render.renderImage();
         render.writeToImage();
