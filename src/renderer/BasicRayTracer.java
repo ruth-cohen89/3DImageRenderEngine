@@ -4,6 +4,7 @@ import elements.LightSource;
 import primitives.*;
 import scene.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import geometries.Intersectable.*;
@@ -14,13 +15,37 @@ public class BasicRayTracer extends RayTracerBase {
     private static final double INITIAL_K = 1.0;      //
     private static final int MAX_CALC_COLOR_LEVEL = 10; //
     private static final double MIN_CALC_COLOR_K = 0.001; //
-
+    private int _numOfRays=0;
+    private double _rayDistance=0;
 
     //*constructor
     // scene we want to paint*//
     public BasicRayTracer(Scene scene) {
         super(scene);
     }
+
+    public BasicRayTracer setRayDistance(double rayDistance) {
+        if (rayDistance < 0)
+            throw new IllegalArgumentException("Distance cannot be negative");
+        this._rayDistance = rayDistance;
+        return this;
+    }
+
+    public BasicRayTracer setNumOfRays(int numOfRays) {
+        if (numOfRays < 0)
+            throw new IllegalArgumentException("Number of rays cannot be negative");
+        this._numOfRays = numOfRays;
+        return this;
+    }
+
+    public double getRayDistance() {
+        return _rayDistance;
+    }
+
+    public int getNumOfRays() {
+        return _numOfRays;
+    }
+
 
     //* finds the intersection points of the ray with the scene's 3D model
     //and returns the color of the closest one
@@ -71,7 +96,7 @@ public class BasicRayTracer extends RayTracerBase {
     private Color calcColor(GeoPoint intersection, Ray ray, int level, double k) {
         Color color = intersection.geometry.getEmission(); //color of geometry itself
         color = color.add(calcLocalEffects(intersection, ray, k));// plus color
-        return 1 == level ? color : color.add(calcGlobalEffects(intersection, ray, level, k));
+        return 1 == level ? color : color.add(calcGlobalEffect(intersection, ray, level, k));
     }
 
 
@@ -201,30 +226,79 @@ public class BasicRayTracer extends RayTracerBase {
         return scaled;
     }
 
-    /**
-     * calculate all the global effects
-     *
-     * @param gp
-     * @param ray
-     * @param level
-     * @param k
-     * @return
-     */
+//    /**
+//     * calculate all the global effects
+//     *
+//     * @param gp
+//     * @param ray
+//     * @param level
+//     * @param k
+//     * @return
+//     */
 
-    private Color calcGlobalEffects(GeoPoint gp, Ray ray, int level, double k) {
+//    private Color calcGlobalEffects(GeoPoint gp, Ray ray, int level, double k) {
+//        Color color = Color.BLACK;
+//        Vector n = gp.geometry.getNormal(gp.point);
+//        Material material = gp.geometry.getMaterial();
+//        double kkr = k * material._kR;
+//        if (kkr > MIN_CALC_COLOR_K)
+//            color = calcGlobalEffect(constructReflectedRay(gp.point, ray.getDir(), n), level, material._kR, kkr);
+//        double kkt = k * material._kT;
+//        if (kkt > MIN_CALC_COLOR_K)
+//            color = color.add(
+//                    calcGlobalEffect(constructRefractedRay(gp.point, ray.getDir(), n), level, material._kT, kkt));
+//        return color;
+//    }
+    private Color calcGlobalEffect(GeoPoint geoPoint, Ray ray, int level, double k) {
         Color color = Color.BLACK;
-        Vector n = gp.geometry.getNormal(gp.point);
-        Material material = gp.geometry.getMaterial();
-        double kkr = k * material._kR;
-        if (kkr > MIN_CALC_COLOR_K)
-            color = calcGlobalEffect(constructReflectedRay(gp.point, ray.getDir(), n), level, material._kR, kkr);
-        double kkt = k * material._kT;
-        if (kkt > MIN_CALC_COLOR_K)
-            color = color.add(
-                    calcGlobalEffect(constructRefractedRay(gp.point, ray.getDir(), n), level, material._kT, kkt));
-        return color;
-    }
+        Color ReflectedColor = Color.BLACK;
+        Color RefractedColor = Color.BLACK;
+        Vector n = geoPoint.geometry.getNormal(geoPoint.point);
+        Material material = geoPoint.geometry.getMaterial();
+        List<Ray>beam1=new LinkedList<>(); // for beam of reflected ray
+        List<Ray>beam2=new LinkedList<>(); // for beam of refracted ray
 
+        double kkr = k * material._kR;
+        if (kkr > MIN_CALC_COLOR_K) { //if the reflection is bigger than the minimum of calc color
+
+            Ray reflectionRay = constructReflectedRay(geoPoint.point, ray.getDir(), n);
+            //color = calcGlobalEffects(reflectionRay, level, material.Kr, kkr);
+            if(this._numOfRays==0  || this._rayDistance<=0){
+                beam1.add(reflectionRay);
+            }
+            else {
+                beam1= reflectionRay.createBeamOfRays(geoPoint.geometry.getNormal(geoPoint.point), this.getRayDistance(),this.getNumOfRays());
+            }
+            for(Ray r : beam1) // r = reflectedRay
+            {
+                ReflectedColor = ReflectedColor.add(calcGlobalEffect(r, level, material._kR, kkr)); // //calls the recursion to find the rest of the color
+            }
+            if(beam1.size()>0) {
+                color = color.add(ReflectedColor.reduce(beam1.size()));
+            }
+        }
+
+        double kkt = k * material._kT;
+        if (kkt > MIN_CALC_COLOR_K) { //if the refraction is bigger than the minimum of calc color
+            Ray refractionRay = constructRefractedRay(geoPoint.point, ray.getDir(), n);
+            //color = color.add(calcGlobalEffects(refractionRay, level, material.Kt, kkt));
+            if(this._numOfRays==0 ||this._rayDistance<=0)
+                beam2.add(refractionRay);
+            else
+                beam2 = refractionRay.createBeamOfRays(geoPoint.geometry.getNormal(geoPoint.point), this.getRayDistance(), this.getNumOfRays());
+            for(Ray r : beam2) // r = refractedRay
+            {
+                RefractedColor = RefractedColor.add(calcGlobalEffect(r, level, material._kT, kkt)); // //calls the recursion to find the rest of the color
+            }
+
+            if(beam2.size()>0) {
+                color = color.add(RefractedColor.reduce(beam2.size()));
+            }
+        }
+
+        return color;
+
+    }
     /**
      * @param ray
      * @param level

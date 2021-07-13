@@ -15,6 +15,8 @@ public class Render {
     private ImageWriter _imageWriter;
     private Camera _camera;
     private RayTracerBase _rayTracerBase;
+    private int _threadsCount = 0;
+    private static final int SPARE_THREADS = 2;
 
     public Render setImageWriter(ImageWriter imageWriter) {
         this._imageWriter = imageWriter;
@@ -100,5 +102,17 @@ public class Render {
             throw new MissingResourceException("", "", "");
         }
     }
+//
+//    public Render setMultithreading(int threads) {
+//        if (threads < 0)
+//            throw new IllegalArgumentException("Multithreading parameter must be 0 or higher");
+//        if (threads != 0)
+//            this._threadsCount = threads;
+//        else {
+//            int cores = Runtime.getRuntime().availableProcessors() - SPARE_THREADS;
+//            this._threadsCount = cores <= 2 ? 1 : cores;
+//        }
+//        return this;
+//    }
 }
 

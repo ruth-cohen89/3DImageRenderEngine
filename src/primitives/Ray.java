@@ -3,10 +3,11 @@ package primitives;
 import geometries.*;
 import geometries.Intersectable.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
+import static primitives.Util.*;
+import static primitives.Util.random;
 
 /* Ray:This class represents the set of points on a straight line
  that are on one relative side
@@ -132,5 +133,49 @@ public class Ray {
         return max;
     }
 
+    /**
+     * This function creates a beam of rays
+     * @param normal of type Vector : normal vector to the head of the ray who calls the function
+     * @param distance  of type double : the distance between the  point and the circle we are creating to find the beam
+     * @param numOfRays of type int : the number of rays that will be in the beam
+     * @return a list of all the rays int the beam
+     */
+    public List<Ray> createBeamOfRays(Vector normal,double distance,int numOfRays)
+    {
+        List<Ray> beam=new LinkedList<Ray>();
+        beam.add(this);//the original ray that calls the function - there has to be at least one ray
+        if(numOfRays==1) //if no additional rays were requested here
+            return beam;
+
+        Vector w=this.getDir().normalToVector();//finds a vector that is normal to the direction of the ray
+        //the cross product between the normal vector w and the direction gives a new normal vector to the direction of the ray
+        Vector v=this.getDir().crossProduct(w).normalize();
+
+        Point3D center=this.getPoint(distance);//the center of our circle is the distance requested from p0, the head of the ray that calls the function
+        Point3D randomP=Point3D.ZERO;
+        double xRandom,yRandom,random;
+
+        double randomRadiusValue = random(3 ,6); // the radius will be in range: 3 < r < 6, and will have double values
+
+
+        for(int i=1;i<numOfRays;i++)//starts from 1 because there has to be at least one ray(the original)and we already add it to the beam
+        {
+            xRandom=random(-1,1);//random number [-1,1)
+            yRandom=Math.sqrt(1-Math.pow(xRandom,2)); // always between 0 to 1
+            random=random(-randomRadiusValue,randomRadiusValue);
+            if(xRandom!=0)//vector cannot be scaled with zero
+                randomP=center.add(w.scale(xRandom*randomRadiusValue));//
+            if(yRandom!=0)//vector cannot be scaled with zero
+                randomP=center.add(v.scale(yRandom*randomRadiusValue));//randomRadiusValue
+
+            Vector t= randomP.subtract(this.getP0());//vector from the head of the original ray and the random point
+
+            double normalDotDir=alignZero(normal.dotProduct(this.getDir()));
+            double normalDotT=alignZero(normal.dotProduct(t));
+            if(normalDotDir*normalDotT>0)//if they are both positive or both negative then we need to create a ray with the original p0 and t
+                beam.add(new Ray(t, this.getP0()));
+        }
+        return beam;
+    }
 }
 
