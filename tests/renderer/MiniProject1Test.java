@@ -276,7 +276,7 @@ class MiniProject1Test {
         Render render = new Render()
                 .setImageWriter(imageWriter)
                 .setCamera(camera)
-                .setRayTracer(new BasicRayTracer(scene));//.setRayDistance(1).setNumOfRays(1000));
+                .setRayTracer(new BasicRayTracer(scene).setRayDistance(1).setNumOfRays(80));
         //System.out.print( scene.getName());
         render.renderImage();
         render.writeToImage();

@@ -6,8 +6,8 @@ package primitives;
  * @author Odelia & Ruth
  */
 public class Material {
-    public double _kD=0.0;
-    public double _kS=0.0;
+    public double _kD=0.0;//diffuse of color
+    public double _kS=0.0;//specular (mirror)
     public double _kT=0.0;//transparency coefficient
     public double _kR=0.0;//reflection coefficient
 

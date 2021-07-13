@@ -249,6 +249,15 @@ public class BasicRayTracer extends RayTracerBase {
 //                    calcGlobalEffect(constructRefractedRay(gp.point, ray.getDir(), n), level, material._kT, kkt));
 //        return color;
 //    }
+
+    /**
+     *calculate color in intersection point
+     * @param geoPoint
+     * @param ray
+     * @param level
+     * @param k
+     * @return
+     */
     private Color calcGlobalEffect(GeoPoint geoPoint, Ray ray, int level, double k) {
         Color color = Color.BLACK;
         Color ReflectedColor = Color.BLACK;
@@ -259,7 +268,7 @@ public class BasicRayTracer extends RayTracerBase {
         List<Ray>beam2=new LinkedList<>(); // for beam of refracted ray
 
         double kkr = k * material._kR;
-        if (kkr > MIN_CALC_COLOR_K) { //if the reflection is bigger than the minimum of calc color
+        if (kkr > MIN_CALC_COLOR_K) { //if the object reflects, if the reflection is bigger than the minimum of calc color
 
             Ray reflectionRay = constructReflectedRay(geoPoint.point, ray.getDir(), n);
             //color = calcGlobalEffects(reflectionRay, level, material.Kr, kkr);
