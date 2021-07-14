@@ -1,6 +1,5 @@
 package primitives;
 
-import geometries.*;
 import geometries.Intersectable.*;
 
 import java.util.LinkedList;
@@ -18,6 +17,11 @@ public class Ray {
     Point3D _p0;
     final Vector _dir;
 
+    /**
+     * constructor with vector and point
+     * @param dir
+     * @param p0
+     */
     public Ray(Vector dir, Point3D p0) {
         _p0 = p0;
         _dir = dir.normalized();
@@ -38,6 +42,13 @@ public class Ray {
 //        _p0= point.add(delta); //_p0= point + delta
 //        _dir= direction;
 //    }
+
+    /**
+     * constructor with point and two vectors
+     * @param p0
+     * @param dir
+     * @param normal
+     */
     public Ray(Point3D p0, Vector dir, Vector normal) {
         this(dir, p0); // activate the current instance constructor
 
@@ -140,14 +151,14 @@ public class Ray {
      * @param numOfRays of type int : the number of rays that will be in the beam
      * @return a list of all the rays int the beam
      */
-    public List<Ray> createBeamOfRays(Vector normal,double distance,int numOfRays)
+    public List<Ray> beamOfRays(Vector normal, double distance, int numOfRays)
     {
         List<Ray> beam=new LinkedList<Ray>();
         beam.add(this);//the original ray that calls the function - there has to be at least one ray
         if(numOfRays==1) //if no additional rays were requested here
             return beam;
 
-        Vector w=this.getDir().normalToVector();//finds a vector that is normal to the direction of the ray
+        Vector w=this.getDir().normalVector();//finds a vector that is normal to the direction of the ray
         //the cross product between the normal vector w and the direction gives a new normal vector to the direction of the ray
         Vector v=this.getDir().crossProduct(w).normalize();
 

@@ -10,8 +10,7 @@ public class Material {
     public double _kS=0.0;//specular (mirror)
     public double _kT=0.0;//transparency coefficient (0,1) , closer to 1 means more transparent (1- super transparent, 0-nothing)
     public double _kR=0.0;//reflection coefficient, closer to 1 the object reflects more (1- totally reflects, 0-nothing)
-
-    public int _Shininess =0;
+    public int _Shininess =0;//shininess of the material.
 
 
     /**

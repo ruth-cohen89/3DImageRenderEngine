@@ -42,6 +42,11 @@ public abstract class Geometry implements Intersectable {
         return _material;
     }
 
+    /**
+     * set the material
+     * @param material
+     * @return
+     */
     public Geometry setMaterial(Material material) {
         _material = material;
         return this;

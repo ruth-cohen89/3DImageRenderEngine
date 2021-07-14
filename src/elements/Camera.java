@@ -20,6 +20,10 @@ public class Camera {
     double _height;
     double _distance;  //The distance between the View Plane to the camera
 
+    /**
+     * constructor with builder
+     * @param builder
+     */
     public Camera(Builder builder) {
         _P0 = builder._P0;
         _vTo = builder._vTo;
@@ -84,6 +88,9 @@ public class Camera {
 
     }
 
+    /**
+     * class of builder that we use in camera class
+     */
     public static class Builder {
         final private Point3D _P0;  //The eye of the camera
         final private Vector _vTo;
@@ -127,11 +134,21 @@ public class Camera {
             return this;
         }
 
+        /**
+         * creating a new camera
+         * @return a camera
+         */
         public Camera build() {
             Camera camera = new Camera(this);
             return camera;
         }
 
+        /**
+         * constructor
+         * @param p0
+         * @param vTo
+         * @param vUp
+         */
         public Builder(Point3D p0, Vector vTo, Vector vUp) {
             _P0 = p0;
             _vTo = vTo.normalized();
@@ -142,6 +159,12 @@ public class Camera {
             _vRight = _vTo.crossProduct(_vUp); //This vector has been normalized
         }
 
+        /**
+         * set the view plane size with builder
+         * @param width
+         * @param height
+         * @return
+         */
         public Builder setViewPlaneSize(double width, double height) {
             _width=width;
             _height=height;

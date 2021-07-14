@@ -37,6 +37,11 @@ public class Tube extends  Geometry{
                 '}';
     }
 
+    /**
+     * normal to a point on the tube
+     * @param point should be null for flat geometries
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D point) {
         Point3D P0= _ray.getP0();

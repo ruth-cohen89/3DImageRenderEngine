@@ -24,6 +24,11 @@ public class BasicRayTracer extends RayTracerBase {
         super(scene);
     }
 
+    /**
+     * sets the distance between the intersection point to the circle
+     * @param rayDistance
+     * @return the ray distance
+     */
     public BasicRayTracer setRayDistance(double rayDistance) {
         if (rayDistance < 0)
             throw new IllegalArgumentException("Distance cannot be negative");
@@ -31,6 +36,11 @@ public class BasicRayTracer extends RayTracerBase {
         return this;
     }
 
+    /**
+     * set the number of rays of the beam
+     * @param numOfRays
+     * @return
+     */
     public BasicRayTracer setNumOfRays(int numOfRays) {
         if (numOfRays < 0)
             throw new IllegalArgumentException("Number of rays cannot be negative");
@@ -38,10 +48,18 @@ public class BasicRayTracer extends RayTracerBase {
         return this;
     }
 
+    /**
+     * get the ray distance
+     * @return double distance
+     */
     public double getRayDistance() {
         return _rayDistance;
     }
 
+    /**
+     * get the number of rays for the beam
+     * @return int num of rays for the beam
+     */
     public int getNumOfRays() {
         return _numOfRays;
     }
@@ -160,6 +178,14 @@ public class BasicRayTracer extends RayTracerBase {
         return true;
     }
 
+    /**
+     * check shading between point to light source relatively to transparency.
+     * @param light
+     * @param l
+     * @param n
+     * @param geopoint
+     * @ the level of shadow
+     */
     private double transparency(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray(geopoint.point, lightDirection, n);
@@ -192,17 +218,6 @@ public class BasicRayTracer extends RayTracerBase {
      * @return specular light color
      */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, double nl, int nShininess, Color ip) {
-/*
-         Vector R = l.add(n.scale(2 * nl)); // nl cannot be zero double
-        double max=Math.max(0, v.scale(-1).dotProduct(R));
-        var p=Math.pow(max, nShininess);
-        return ip.scale(ks*p);
-
-
-
-        Vector r = l.substract(n.scale(nl * 2)).normalized();
-        double factor = Math.max(0, (v.scale(-1)).dotProduct(r));
-        return ip.scale(ks * Math.pow(factor, nShininess));*/
 
         Vector r = l.substract(n.scale(2 * nl));
         Vector minusV = v.scale(-1);
@@ -226,29 +241,6 @@ public class BasicRayTracer extends RayTracerBase {
         return scaled;
     }
 
-//    /**
-//     * calculate all the global effects
-//     *
-//     * @param gp
-//     * @param ray
-//     * @param level
-//     * @param k
-//     * @return
-//     */
-
-//    private Color calcGlobalEffects(GeoPoint gp, Ray ray, int level, double k) {
-//        Color color = Color.BLACK;
-//        Vector n = gp.geometry.getNormal(gp.point);
-//        Material material = gp.geometry.getMaterial();
-//        double kkr = k * material._kR;
-//        if (kkr > MIN_CALC_COLOR_K)
-//            color = calcGlobalEffect(constructReflectedRay(gp.point, ray.getDir(), n), level, material._kR, kkr);
-//        double kkt = k * material._kT;
-//        if (kkt > MIN_CALC_COLOR_K)
-//            color = color.add(
-//                    calcGlobalEffect(constructRefractedRay(gp.point, ray.getDir(), n), level, material._kT, kkt));
-//        return color;
-//    }
 
     /**
      *calculate color in intersection point
@@ -277,7 +269,7 @@ public class BasicRayTracer extends RayTracerBase {
                 beam1.add(reflectionRay);
             }
             else {
-                beam1= reflectionRay.createBeamOfRays(geoPoint.geometry.getNormal(geoPoint.point), this.getRayDistance(),this.getNumOfRays());
+                beam1= reflectionRay.beamOfRays(geoPoint.geometry.getNormal(geoPoint.point), this.getRayDistance(),this.getNumOfRays());
             }
             for(Ray r : beam1) // r = reflectedRay
             {
@@ -296,7 +288,7 @@ public class BasicRayTracer extends RayTracerBase {
             if(this._numOfRays==0 ||this._rayDistance<=0)
                 beam2.add(refractionRay);
             else
-                beam2 = refractionRay.createBeamOfRays(geoPoint.geometry.getNormal(geoPoint.point), this.getRayDistance(), this.getNumOfRays());
+                beam2 = refractionRay.beamOfRays(geoPoint.geometry.getNormal(geoPoint.point), this.getRayDistance(), this.getNumOfRays());
             for(Ray r : beam2) // r = refractedRay
             {
                 RefractedColor = RefractedColor.add(calcGlobalEffect(r, level, material._kT, kkt)); // //calls the recursion to find the rest of the color
@@ -348,15 +340,7 @@ public class BasicRayTracer extends RayTracerBase {
         return new Ray(point, r, n);
     }
 
-//
-//    private Ray constructReflectedRay(Vector n, Point3D point, Ray ray) {
-//        Vector v = ray.getDir();
-//        double vn = v.dotProduct(n);
-//        Vector vnn = n.scale(-2 * vn);
-//        Vector r = v.add(vnn);
-//        // use the constructor with 3 arguments to move the head if needed
-//        return new Ray(point, n, r);
-//    }
+
 }
 
 

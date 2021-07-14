@@ -88,12 +88,12 @@ class MiniProject1Test {
                 //yellow rectangle of bridge
                 new Polygon(new Point3D(40, 80, 200), new Point3D(112, 80, 100),   new Point3D(112, -55, 100),new Point3D(40, -55, 200))
                         .setEmission(new Color(java.awt.Color.YELLOW))
-                        .setMaterial(new Material().setKs(1).setKt(1).setKr(0)),
+                        .setMaterial(new Material().setKs(1).setKt(1).setKr(0).setKd(0.7)),
 
                 //red rectangle of bridge
                 new Polygon(new Point3D(120, 91, 250), new Point3D(277, 91, 100),  new Point3D(277, -50, 100),new Point3D(120, -50, 250))
                         .setEmission(new Color(java.awt.Color.RED))
-                        .setMaterial(new Material().setKs(1).setKt(1).setKr(0)),
+                        .setMaterial(new Material().setKs(1).setKt(1).setKr(0).setKd(0.7)),
 
                 //level of bridge
                 new Polygon(new Point3D(20, -330, 100), new Point3D(140, -330, 100),  new Point3D(140, -350, 100),new Point3D(20, -350, 100))
@@ -149,12 +149,12 @@ class MiniProject1Test {
                 //red rectangle of bridge
                 new Polygon(new Point3D(-222, 91, 80), new Point3D(-345, 91, 230),  new Point3D(-345, -50, 230),new Point3D(-222, -50, 80))
                     .setEmission(new Color(java.awt.Color.RED))
-                    .setMaterial(new Material().setKs(1).setKt(1).setKr(0)),
+                    .setMaterial(new Material().setKs(1).setKt(1).setKr(0).setKd(0.7)),
 
                 //yellow rectangle of bridge
                 new Polygon(new Point3D(-394, 96, 80), new Point3D(-409, 91, 230),  new Point3D(-409, -50, 230),new Point3D(-394, -50, 80))
                         .setEmission(new Color(java.awt.Color.YELLOW))
-                        .setMaterial(new Material().setKs(1).setKt(1).setKr(0)),
+                        .setMaterial(new Material().setKs(1).setKt(1).setKr(0).setKd(0.7)),
 
 
                 //surface 2 (2,1,4,3)
@@ -195,7 +195,7 @@ class MiniProject1Test {
                 //playground surface
                 new Polygon(new Point3D(-850, -600, 50), new Point3D(850, -600, 50), new Point3D(850, -310, -52), new Point3D(-850, -310, -52))
                         .setEmission(new Color(java.awt.Color.darkGray))
-                        .setMaterial(new Material().setKs(0.5).setKt(0).setKr(1).setShininess(1000)),
+                        .setMaterial(new Material().setKs(0).setKt(0).setKr(1).setShininess(1000)),
 
                 //moon
                 new Sphere(78, new Point3D(-550, 450, -50))
@@ -276,8 +276,7 @@ class MiniProject1Test {
         Render render = new Render()
                 .setImageWriter(imageWriter)
                 .setCamera(camera)
-                .setRayTracer(new BasicRayTracer(scene).setRayDistance(1).setNumOfRays(10));
-        //System.out.print( scene.getName());
+                .setRayTracer(new BasicRayTracer(scene).setRayDistance(50).setNumOfRays(80));
         render.renderImage();
         render.writeToImage();
     }

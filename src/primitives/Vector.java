@@ -31,6 +31,11 @@ public class Vector {
         this(new Point3D(x, y, z));
     }
 
+    /**
+     * equal function
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +76,11 @@ public class Vector {
         return x + y + z;
     }
 
+    /**
+     * substract vectors
+     * @param v
+     * @return new vector after the subtract
+     */
     public Vector substract(Vector v) {
         double x = _head._x._coord - v._head._x._coord;
         double y = _head._y._coord - v._head._y._coord;
@@ -78,6 +88,11 @@ public class Vector {
 
         return new Vector(x, y, z);
     }
+
+    /**
+     * calculate the length of the vector squared
+     * @return double length squared
+     */
     public double lengthSquared() {
         double xx = _head._x._coord * _head._x._coord;
         double yy = _head._y._coord * _head._y._coord;
@@ -132,6 +147,11 @@ public class Vector {
 
     }
 
+    /**
+     * adds vectors
+     * @param v
+     * @return new vector after the adding
+     */
     public Vector add(Vector v) {
         double x = _head._x._coord + v._head._x._coord;
         double y = _head._y._coord + v._head._y._coord;
@@ -143,7 +163,7 @@ public class Vector {
      * This function helps us to calculate  a normal vector to the vector that calls the function
      * @return a new vector
      */
-    public Vector normalToVector()
+    public Vector normalVector()
     {
         double coordinate;
 
@@ -165,16 +185,16 @@ public class Vector {
         }
         if(Math.abs(this.getHead().getZ())<coordinate)
         {
-            coordinate=2;//last coordinate that we are checking so no need to reassign coordinate
+            coordinate=2;
 
         }
-        if(coordinate==0) {//x is the smallest
+        if(coordinate==0) {//if x is the smallest
             return new Vector(0, -this.getHead().getZ(), this.getHead().getY()).normalize();
         }
-        if(coordinate==1) {//y is the smallest
+        if(coordinate==1) {//if y is the smallest
             return new Vector(-this.getHead().getZ(), 0, this.getHead().getX()).normalize();
         }
-        //z is the smallest
+        //else, z is the smallest
         return new Vector(this.getHead().getY(),-this.getHead().getX(),0).normalize();
     }
 }

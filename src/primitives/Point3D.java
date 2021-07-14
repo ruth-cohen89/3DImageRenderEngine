@@ -38,6 +38,11 @@ public class Point3D {
     }
 
 
+    /**
+     * equal function
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,6 +51,10 @@ public class Point3D {
         return _x.equals(point3D._x) && _y.equals(point3D._y) && _z.equals(point3D._z);
     }
 
+    /**
+     * print the string for the point
+     * @return
+     */
     @Override
     public String toString() {
         return "Point3D{" +
